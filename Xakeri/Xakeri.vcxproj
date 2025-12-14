@@ -120,6 +120,12 @@
   <ItemGroup>
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Stage1.cpp" />
+    <ClCompile Include="Stage2.cpp" />
+    <ClCompile Include="Stage3.cpp" />
+    <ClCompile Include="Stage4.cpp" />
+    <ClCompile Include="Stage5.cpp" />
+    <ClCompile Include="Stage6.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -128,10 +134,37 @@
     <ClInclude Include="Settings.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stage3.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stage4.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stage5.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stage6.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage1.resx">
+      <DependentUpon>Stage1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage4.resx">
+      <DependentUpon>Stage4.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

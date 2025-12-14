@@ -1,7 +1,12 @@
 #pragma once
 
-#include "Settings.h" // Подключи свою форму настроек
-
+#include "Settings.h" 
+#include "Stage1.h"
+#include "Stage2.h"
+#include "Stage3.h"
+#include "Stage4.h"
+#include "Stage5.h"
+#include "Stage6.h"
 namespace Xakeri {
 
 	using namespace System;
@@ -16,6 +21,7 @@ namespace Xakeri {
 	public:
 		MyForm(void)
 		{
+
 			InitializeComponent();
 
 			// Настройка TextBox
@@ -29,14 +35,15 @@ namespace Xakeri {
 			textBox1->Text =
 				"Терминал\r\n"
 				"> Настройки - Н, Выход - В\r\n"
-				">";
+				"> ";
 
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
 
-			
+
 			textBox1->KeyDown += gcnew KeyEventHandler(this, &MyForm::textBox1_KeyDown);
 		}
+		
 
 	protected:
 		~MyForm()
@@ -55,7 +62,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
-	private: System::Windows::Forms::Button^ button7;
+
 
 	private:
 		int inputStart;
@@ -70,7 +77,6 @@ namespace Xakeri {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -82,6 +88,7 @@ namespace Xakeri {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(364, 368);
 			this->textBox1->TabIndex = 0;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// button1
 			// 
@@ -106,6 +113,7 @@ namespace Xakeri {
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"Этап 2";
 			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button3
 			// 
@@ -117,6 +125,7 @@ namespace Xakeri {
 			this->button3->TabIndex = 3;
 			this->button3->Text = L"Этап 3";
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// button4
 			// 
@@ -128,6 +137,7 @@ namespace Xakeri {
 			this->button4->TabIndex = 4;
 			this->button4->Text = L"Этап 4";
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
 			// 
 			// button5
 			// 
@@ -139,6 +149,7 @@ namespace Xakeri {
 			this->button5->TabIndex = 5;
 			this->button5->Text = L"Этап 5";
 			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
 			// 
 			// button6
 			// 
@@ -152,25 +163,12 @@ namespace Xakeri {
 			this->button6->UseVisualStyleBackColor = false;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
-			// button7
-			// 
-			this->button7->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button7->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button7->Location = System::Drawing::Point(384, 289);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(174, 33);
-			this->button7->TabIndex = 7;
-			this->button7->Text = L"Этап 7";
-			this->button7->UseVisualStyleBackColor = false;
-			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(578, 369);
-			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -181,6 +179,7 @@ namespace Xakeri {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -231,10 +230,47 @@ namespace Xakeri {
 		}
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+		Stage6^ stage1Form = gcnew Stage6();
+		stage1Form->Show();
+		this->Hide();
+		button6->Enabled=false;
 	}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		Stage1^ stage1Form = gcnew Stage1();
+		stage1Form->Show();  
+		this->Hide();
+		button1->Enabled = false;
+	}
+	
+	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	
+	}
+	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+	
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stage2^ stage1Form = gcnew Stage2();
+	stage1Form->Show();   
+	this->Hide();
+	button2->Enabled = false;
 }
-private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stage3^ stage1Form = gcnew Stage3();
+	stage1Form->Show();
+	this->Hide();
+	button3->Enabled = false;
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stage4^ stage1Form = gcnew Stage4();
+	stage1Form->Show();
+	this->Hide();
+	button4->Enabled = false;
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stage5^ stage1Form = gcnew Stage5();
+	stage1Form->Show();
+	this->Hide();
+	button5->Enabled = false;
 }
 };
 }
