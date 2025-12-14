@@ -90,7 +90,7 @@ namespace Xakeri {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(174, 33);
 			this->button1->TabIndex = 1;
-			this->button1->Text = L"Этап 1";
+			this->button1->Text = L" Этап 1";
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
