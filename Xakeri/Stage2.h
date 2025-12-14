@@ -16,6 +16,8 @@ namespace Xakeri {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
+	using namespace System::Text;
 
 	public ref class Stage2 : public System::Windows::Forms::Form
 	{
@@ -25,22 +27,27 @@ namespace Xakeri {
 
 			InitializeComponent();
 
-			// Настройка TextBox
+
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
 			textBox1->Font = gcnew Drawing::Font("Consolas", 33);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
 
-			// Начальный текст терминала
+
 			textBox1->Text =
 				"Терминал\r\n"
-				"> Настройки - Н, Выход - В\r\n"
+				"> Настройки - Н, Выход - В, Проверка - П\r\n"
 				"> ";
 
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
 			textBox1->KeyDown += gcnew KeyEventHandler(this, &Stage2::textBox1_KeyDown);
+
+			// Random generator
+			rnd = gcnew Random();
+			currentFileNumber = -1;
+			currentEmail = String::Empty;
 		}
 	protected:
 		~Stage2()
@@ -52,13 +59,30 @@ namespace Xakeri {
 		}
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::CheckBox^ checkBox2;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::TextBox^ textBox2;
+
+
 	private:
 		int inputStart;
 
+		// --- added members ---
+		int currentFileNumber;
+		Random^ rnd;
+	private: System::Windows::Forms::Label^ label1;
+		   String^ currentEmail;
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -74,27 +98,172 @@ namespace Xakeri {
 			this->textBox1->TabIndex = 0;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Stage2::textBox1_TextChanged);
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->checkBox1->Location = System::Drawing::Point(3, 3);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(390, 42);
+			this->checkBox1->TabIndex = 3;
+			this->checkBox1->Text = L"Подозрительная почта";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Stage2::checkBox1_CheckedChanged);
+			// 
+			// checkBox2
+			// 
+			this->checkBox2->AutoSize = true;
+			this->checkBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->checkBox2->Location = System::Drawing::Point(3, 68);
+			this->checkBox2->Name = L"checkBox2";
+			this->checkBox2->Size = System::Drawing::Size(488, 42);
+			this->checkBox2->TabIndex = 4;
+			this->checkBox2->Text = L"Подозрительное содержание";
+			this->checkBox2->UseVisualStyleBackColor = true;
+			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &Stage2::checkBox2_CheckedChanged);
+			// 
+			// panel1
+			// 
+			this->panel1->BackColor = System::Drawing::Color::Transparent;
+			this->panel1->Controls->Add(this->checkBox1);
+			this->panel1->Controls->Add(this->checkBox2);
+			this->panel1->Location = System::Drawing::Point(958, 395);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(533, 150);
+			this->panel1->TabIndex = 5;
+			// 
+			// textBox2
+			// 
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->textBox2->Location = System::Drawing::Point(949, 51);
+			this->textBox2->Multiline = true;
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->ReadOnly = true;
+			this->textBox2->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->textBox2->Size = System::Drawing::Size(576, 327);
+			this->textBox2->TabIndex = 6;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label1->Location = System::Drawing::Point(1068, 1);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(351, 29);
+			this->label1->TabIndex = 7;
+			this->label1->Text = L"Выберите признаки фишинга";
+			// 
 			// Stage2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1902, 1033);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Stage2";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Stage2";
 			this->Load += gcnew System::EventHandler(this, &Stage2::Stage2_Load);
+			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 
+		// --- helper: load random file number different from current
+	private: void LoadRandomFile()
+	{
+		int newNum = currentFileNumber;
+		// ensure different file to show "смена" when incorrect
+		while (newNum == currentFileNumber)
+		{
+			newNum = rnd->Next(1, 6); // 1..5
+		}
+		LoadFile(newNum);
+	}
+
+		   // --- helper: load given file number and set checkboxes accordingly
+	private: void LoadFile(int fileNumber)
+	{
+		currentFileNumber = fileNumber;
+		String^ path = String::Format("C:\\Учеба\\XAKERI\\VSC\\Xakeri\\fish\\{0}.txt", fileNumber);
+
+		// reset checkboxes first (user will choose; options are NOT disabled)
+		checkBox1->Checked = false;
+		checkBox2->Checked = false;
+
+		// Ensure both checkboxes remain enabled so the user can pick any combination
+		checkBox1->Enabled = true;
+		checkBox2->Enabled = true;
+
+		// Read file and put content into textBox2 (email + message without labels)
+		try
+		{
+			if (!File::Exists(path))
+			{
+				textBox2->Text = "Файл не найден: " + path;
+				currentEmail = String::Empty;
+				return;
+			}
+
+			array<String^>^ lines = File::ReadAllLines(path, Encoding::UTF8);
+
+			// Parse first line: Почта: ...
+			if (lines->Length >= 1 && lines[0]->StartsWith("Почта:"))
+			{
+				currentEmail = lines[0]->Substring(7)->Trim(); // after "Почта:"
+			}
+			else if (lines->Length >= 1)
+			{
+				currentEmail = lines[0]->Trim();
+			}
+			else
+			{
+				currentEmail = String::Empty;
+			}
+
+			// Build textBox2: show email (without label) and then the message (without "Текст:")
+			StringBuilder^ sb = gcnew StringBuilder();
+			if (!String::IsNullOrEmpty(currentEmail))
+			{
+				sb->AppendLine(currentEmail);
+			}
+
+			sb->AppendLine("----------------");
+
+			// append remaining lines (from index 1 onward) and remove "Текст:" label if present
+			for (int i = 1; i < lines->Length; i++)
+			{
+				String^ line = lines[i];
+				if (line->StartsWith("Текст:"))
+				{
+					line = line->Substring(6)->Trim();
+				}
+				sb->AppendLine(line);
+			}
+
+			textBox2->Text = sb->ToString()->Trim();
+		}
+		catch (Exception^ ex)
+		{
+			textBox2->Text = "Ошибка чтения файла: " + ex->Message;
+			currentEmail = String::Empty;
+		}
+	}
+
 	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 	{
-		// Запрет удаления прошлого текста
+
 		if (textBox1->SelectionStart < inputStart &&
 			(e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete))
 		{
@@ -102,7 +271,7 @@ namespace Xakeri {
 			return;
 		}
 
-		// Обработка Enter
+
 		if (e->KeyCode == Keys::Enter)
 		{
 			e->SuppressKeyPress = true;
@@ -115,25 +284,70 @@ namespace Xakeri {
 			textBox1->SelectionStart = inputStart;
 		}
 	}
-	private: bool waitingForExitConfirmation = false; // новое поле
+	private: bool waitingForExitConfirmation = false;
 
 	private: void ExecuteCommand(String^ cmd)
 	{
 		cmd = cmd->ToLower();
 
+		// Если мы в режиме подтверждения выхода (В -> y/n), обрабатываем это отдельно
 		if (waitingForExitConfirmation)
 		{
-			// Ждем ответ на подтверждение выхода
+
 			if (cmd == "y")
 			{
-				Application::Exit();
+				// Вместо немедленного выхода — проверяем состояние чекбоксов в зависимости от currentFileNumber
+				bool correct = false;
+
+				switch (currentFileNumber)
+				{
+				case 1:
+					// both should be active (checked)
+					correct = (checkBox1->Checked == true && checkBox2->Checked == true);
+					break;
+				case 2:
+				case 3:
+					// only checkBox1 should be active
+					correct = (checkBox1->Checked == true && checkBox2->Checked == false);
+					break;
+				case 4:
+				case 5:
+					// only checkBox2 should be active
+					correct = (checkBox1->Checked == false && checkBox2->Checked == true);
+					break;
+				default:
+					correct = false;
+					break;
+				}
+
+				if (correct)
+				{
+					// generate login (5-7 random english lowercase letters)
+					int len = rnd->Next(5, 8); // 5..7
+					StringBuilder^ sb = gcnew StringBuilder();
+					for (int i = 0; i < len; i++)
+					{
+						wchar_t ch = (wchar_t)('a' + rnd->Next(0, 26));
+						sb->Append(ch);
+					}
+					String^ login = sb->ToString();
+
+					textBox1->AppendText("\r\nУспешно! login: " + login);
+					// После успешной проверки можно, при желании, выходить. Я оставлю форму открытой.
+				}
+				else
+				{
+					// неправильно — меняем файл и загружаем другой
+					textBox1->AppendText("\r\nНеправильно — загружаю другой файл и сбрасываю чекбоксы.");
+					LoadRandomFile();
+				}
 			}
 			else if (cmd == "n")
 			{
-				// Отмена выхода — возвращаем прошлый текст
+
 				textBox1->Text =
 					"Терминал\r\n"
-					"> Настройки - Н, Выход - В\r\n"
+					"> Настройки - Н, Выход - В, Проверка - П\r\n"
 					"> ";
 				inputStart = textBox1->Text->Length;
 				textBox1->SelectionStart = inputStart;
@@ -143,30 +357,93 @@ namespace Xakeri {
 				textBox1->AppendText("\r\nНеизвестная команда");
 			}
 
-			waitingForExitConfirmation = false; // сброс состояния
+			waitingForExitConfirmation = false;
+			return;
 		}
-		else if (cmd == "н" || cmd == "настройки")
+
+		// Команда настройки
+		if (cmd == "н" || cmd == "настройки")
 		{
 			Settings^ settingsForm = gcnew Settings();
 			settingsForm->Show();
+			return;
 		}
-		else if (cmd == "в" || cmd == "выход")
+
+		// Команда выхода (инициирует подтверждение)
+		if (cmd == "в" || cmd == "выход")
 		{
-			// Запрос подтверждения выхода
+
 			textBox1->AppendText("\r\nВы уверены? (y/n)");
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
 			waitingForExitConfirmation = true;
+			return;
 		}
-		else
+
+		// Команда ПРОВЕРКА: П или "проверка"
+		if (cmd == "п" || cmd == "проверка")
 		{
-			textBox1->AppendText("\r\nНеизвестная команда");
+			bool correct = false;
+
+			switch (currentFileNumber)
+			{
+			case 1:
+				correct = (checkBox1->Checked == true && checkBox2->Checked == true);
+				break;
+			case 2:
+			case 3:
+				correct = (checkBox1->Checked == true && checkBox2->Checked == false);
+				break;
+			case 4:
+			case 5:
+				correct = (checkBox1->Checked == false && checkBox2->Checked == true);
+				break;
+			default:
+				correct = false;
+				break;
+			}
+
+			if (correct)
+			{
+
+				int len = rnd->Next(5, 8);
+				StringBuilder^ sb = gcnew StringBuilder();
+				for (int i = 0; i < len; i++)
+				{
+					wchar_t ch = (wchar_t)('a' + rnd->Next(0, 26));
+					sb->Append(ch);
+				}
+				String^ login = sb->ToString();
+
+				textBox1->AppendText("\r\nПравильно");
+				textBox1->AppendText("\r\nlogin: " + login);
+			}
+			else
+			{
+				textBox1->AppendText("\r\nОШИБКА ПРОВЕРКИ. ЗАГРУЖАЮ НОВЫЙ ФАЙЛ.");
+				LoadRandomFile();
+			}
+			return;
 		}
+
+		// Неизвестная команда
+		textBox1->AppendText("\r\nНеизвестная команда");
 	}
 	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e) {
-
+		// При загрузке формы выбираем случайный файл и его содержимое
+		currentFileNumber = -1;
+		int startNum = rnd->Next(1, 6); // 1..5
+		LoadFile(startNum);
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void checkBox2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }
