@@ -92,6 +92,7 @@ namespace Xakeri {
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Этап 1";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
 			// button2
 			// 
@@ -216,5 +217,7 @@ namespace Xakeri {
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
