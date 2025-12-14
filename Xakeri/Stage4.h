@@ -118,7 +118,7 @@ namespace Xakeri {
 			   this->Controls->Add(this->textBox1);
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			   this->Name = L"Stage4";
-			   this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
+			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"Stage4";
 			   this->Load += gcnew System::EventHandler(this, &Stage4::Stage4_Load);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -151,7 +151,7 @@ namespace Xakeri {
 			   }
 			   return result;
 		   }
-		   // Генерация случайного русского текста (10 букв в ВЕРХНЕМ регистре)
+		   // Генерация случайного русского текста (5 букв в ВЕРХНЕМ регистре)
 		   std::string generateRandomRussianText(int length) {
 			   std::string randomText = "";
 			   for (int i = 0; i < length; ++i) {

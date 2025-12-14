@@ -82,7 +82,7 @@ namespace Xakeri {
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Stage6";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Stage6";
 			this->Load += gcnew System::EventHandler(this, &Stage6::Stage6_Load);
 			this->ResumeLayout(false);
