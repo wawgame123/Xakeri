@@ -111,7 +111,7 @@ namespace Xakeri {
 			this->label2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label2.Image")));
 			this->label2->ImageAlign = System::Drawing::ContentAlignment::MiddleRight;
-			this->label2->Location = System::Drawing::Point(112, 527);
+			this->label2->Location = System::Drawing::Point(3, 523);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(532, 63);
 			this->label2->TabIndex = 2;
@@ -130,7 +130,7 @@ namespace Xakeri {
 				static_cast<System::Byte>(204)));
 			this->label3->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label3.Image")));
-			this->label3->Location = System::Drawing::Point(364, 455);
+			this->label3->Location = System::Drawing::Point(136, 885);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(600, 63);
 			this->label3->TabIndex = 3;
@@ -149,7 +149,7 @@ namespace Xakeri {
 			this->label4->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label4.Image")));
 			this->label4->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->label4->Location = System::Drawing::Point(312, 813);
+			this->label4->Location = System::Drawing::Point(3, 709);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(584, 63);
 			this->label4->TabIndex = 4;
@@ -168,7 +168,7 @@ namespace Xakeri {
 			this->label5->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label5->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label5.Image")));
 			this->label5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->label5->Location = System::Drawing::Point(248, 0);
+			this->label5->Location = System::Drawing::Point(226, 120);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(439, 126);
 			this->label5->TabIndex = 5;
@@ -188,7 +188,7 @@ namespace Xakeri {
 			this->label6->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label6.Image")));
 			this->label6->ImageAlign = System::Drawing::ContentAlignment::TopRight;
-			this->label6->Location = System::Drawing::Point(552, 518);
+			this->label6->Location = System::Drawing::Point(112, 319);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(444, 126);
 			this->label6->TabIndex = 6;
@@ -227,7 +227,7 @@ namespace Xakeri {
 			this->panel1->Controls->Add(this->label6);
 			this->panel1->Location = System::Drawing::Point(937, 1);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(967, 1038);
+			this->panel1->Size = System::Drawing::Size(962, 1038);
 			this->panel1->TabIndex = 8;
 			// 
 			// Stage5
@@ -242,7 +242,7 @@ namespace Xakeri {
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Stage5";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Stage5";
 			this->Load += gcnew System::EventHandler(this, &Stage5::Stage5_Load);
 			this->panel1->ResumeLayout(false);
@@ -347,12 +347,12 @@ namespace Xakeri {
 	}
 	private: System::Void Stage5_Load(System::Object^ sender, System::EventArgs^ e) {
 		srand(time(0));
-		label2->Location = System::Drawing::Point(ranx(3,367), rany(0, 905));
-		label3->Location = System::Drawing::Point(ranx(3, 367), rany(0, 905));
-		label4->Location = System::Drawing::Point(ranx(3, 367), rany(0, 905));
-		label5->Location = System::Drawing::Point(ranx(3, 367), rany(0, 905));
-		label6->Location = System::Drawing::Point(ranx(3, 367), rany(0, 905));
-		label7->Location = System::Drawing::Point(ranx(3, 367), rany(0, 905));
+		label2->Location = System::Drawing::Point(ranx(10,600), rany(0, 850));
+		label3->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
+		label4->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
+		label5->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
+		label6->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
+		label7->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
 
 	}
 
