@@ -218,7 +218,6 @@ namespace Xakeri {
 		{
 			Settings^ settingsForm = gcnew Settings();
 			settingsForm->Show();
-			this->BeginInvoke(gcnew Action(this, &MyForm::Hide));
 		}
 		else if (cmd == "в" || cmd == "выход")
 		{
