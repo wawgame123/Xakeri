@@ -151,7 +151,7 @@ namespace Xakeri {
 			   }
 			   return result;
 		   }
-		   // Генерация случайного русского текста (10 букв в ВЕРХНЕМ регистре)
+		   // Генерация случайного русского текста (5 букв в ВЕРХНЕМ регистре)
 		   std::string generateRandomRussianText(int length) {
 			   std::string randomText = "";
 			   for (int i = 0; i < length; ++i) {
