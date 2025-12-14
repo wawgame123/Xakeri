@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Settings.h" // Подключи свою форму настроек
+
 namespace Xakeri {
 
 	using namespace System;
@@ -9,24 +11,34 @@ namespace Xakeri {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Сводка для MyForm
-	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: добавьте код конструктора
-			//
+
+			// Настройка TextBox
+			textBox1->BackColor = Color::Black;
+			textBox1->ForeColor = Color::Lime;
+			textBox1->Font = gcnew Drawing::Font("Consolas", 12);
+			textBox1->Multiline = true;
+			textBox1->ScrollBars = ScrollBars::Vertical;
+
+			// Начальный текст терминала
+			textBox1->Text =
+				"Терминал\r\n"
+				"> Настройки - Н, Выход - В\r\n"
+				">";
+
+			inputStart = textBox1->Text->Length;
+			textBox1->SelectionStart = inputStart;
+
+			
+			textBox1->KeyDown += gcnew KeyEventHandler(this, &MyForm::textBox1_KeyDown);
 		}
 
 	protected:
-		/// <summary>
-		/// Освободить все используемые ресурсы.
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -34,39 +46,123 @@ namespace Xakeri {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::TextBox^ textBox1;
-	protected:
+	private: System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ button6;
 
 	private:
-		/// <summary>
-		/// Обязательная переменная конструктора.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+		int inputStart;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(31, 102);
+			this->textBox1->BackColor = System::Drawing::Color::Black;
+			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox1->Location = System::Drawing::Point(-1, -1);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 22);
+			this->textBox1->Size = System::Drawing::Size(364, 368);
 			this->textBox1->TabIndex = 0;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button1->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button1->FlatAppearance->BorderSize = 0;
+			this->button1->Location = System::Drawing::Point(384, 55);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(174, 33);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"Этап 1";
+			this->button1->UseVisualStyleBackColor = false;
+			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button2->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button2->Location = System::Drawing::Point(384, 94);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(174, 33);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Этап 2";
+			this->button2->UseVisualStyleBackColor = false;
+			// 
+			// button3
+			// 
+			this->button3->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button3->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button3->Location = System::Drawing::Point(384, 133);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(174, 33);
+			this->button3->TabIndex = 3;
+			this->button3->Text = L"Этап 3";
+			this->button3->UseVisualStyleBackColor = false;
+			// 
+			// button4
+			// 
+			this->button4->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button4->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button4->Location = System::Drawing::Point(384, 172);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(174, 33);
+			this->button4->TabIndex = 4;
+			this->button4->Text = L"Этап 4";
+			this->button4->UseVisualStyleBackColor = false;
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button5->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button5->Location = System::Drawing::Point(384, 211);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(174, 33);
+			this->button5->TabIndex = 5;
+			this->button5->Text = L"Этап 5";
+			this->button5->UseVisualStyleBackColor = false;
+			// 
+			// button6
+			// 
+			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button6->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button6->Location = System::Drawing::Point(384, 250);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(174, 33);
+			this->button6->TabIndex = 6;
+			this->button6->Text = L"Этап 6";
+			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(561, 424);
+			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->ClientSize = System::Drawing::Size(578, 369);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->ResumeLayout(false);
@@ -74,5 +170,51 @@ namespace Xakeri {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+	{
+		// Запрет удаления прошлого текста
+		if (textBox1->SelectionStart < inputStart &&
+			(e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete))
+		{
+			e->SuppressKeyPress = true;
+			return;
+		}
+
+		// Обработка Enter
+		if (e->KeyCode == Keys::Enter)
+		{
+			e->SuppressKeyPress = true;
+
+			String^ command = textBox1->Text->Substring(inputStart)->Trim();
+			ExecuteCommand(command);
+
+			textBox1->AppendText("\r\n>");
+			inputStart = textBox1->Text->Length;
+			textBox1->SelectionStart = inputStart;
+		}
+	}
+
+	private: void ExecuteCommand(String^ cmd)
+	{
+		cmd = cmd->ToLower();
+
+		if (cmd == "н" || cmd == "настройки")
+		{
+			Settings^ settingsForm = gcnew Settings();
+			settingsForm->Show();
+			this->BeginInvoke(gcnew Action(this, &MyForm::Hide));
+		}
+		else if (cmd == "в" || cmd == "выход")
+		{
+			Application::Exit();
+		}
+		else
+		{
+			textBox1->AppendText("\r\nНеизвестная команда");
+		}
+	}
+	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
