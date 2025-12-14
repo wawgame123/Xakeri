@@ -34,7 +34,7 @@ namespace Xakeri {
 			// Начальный текст терминала
 			textBox1->Text =
 				"Терминал\r\n"
-				"> Настройки - Н, Выход - В\r\n"
+				"> Настройки - Н, Выход - В, Меню - М\r\n"
 				"> ";
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
@@ -124,6 +124,7 @@ namespace Xakeri {
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			   this->ResumeLayout(false);
 			   this->PerformLayout();
+
 		   }
 #pragma endregion
 		   std::string caesarEncrypt(const std::string& text, int k) {
@@ -150,7 +151,7 @@ namespace Xakeri {
 			   }
 			   return result;
 		   }
-		   // 2. НОВАЯ ФУНКЦИЯ: Генерация случайного русского текста (10 букв в ВЕРХНЕМ регистре)
+		   // Генерация случайного русского текста (10 букв в ВЕРХНЕМ регистре)
 		   std::string generateRandomRussianText(int length) {
 			   std::string randomText = "";
 			   for (int i = 0; i < length; ++i) {
@@ -159,14 +160,14 @@ namespace Xakeri {
 			   }
 			   return randomText;
 		   }
-		   // 3. Функция для генерации serverkey
+		   // Функция для генерации serverkey
 		   String^ generateServerKey() {
 			   int random_part = rand() % 10000;
 			   return "SERVERKEY_S4_" + random_part.ToString();
 		   }
 	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 	{
-		// ... (логика KeyDown без изменений) ...
+	
 		// Запрет удаления прошлого текста
 		if (textBox1->SelectionStart < inputStart &&
 			(e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete))
@@ -188,50 +189,49 @@ namespace Xakeri {
 	private: void ExecuteCommand(String^ cmd)
 	{
 		String^ cmdLower = cmd->ToLower();
+
+		//  ждем ответ на вопрос "Вы уверены?"
 		if (waitingForExitConfirmation)
 		{
 			if (cmdLower == "y")
 			{
-				this->Hide();
-				Application::OpenForms["MyForm"]->Show();
+				Application::Exit();
 			}
 			else if (cmdLower == "n")
 			{
-				// Восстановление промпта
 				textBox1->Text = "\r\n>";
 				inputStart = textBox1->Text->Length;
 				textBox1->SelectionStart = inputStart;
 			}
 			else
 			{
-				textBox1->AppendText("\r\nНеизвестная команда");
+				textBox1->AppendText("\r\nВведите 'y' (да) или 'n' (нет)");
 			}
+			// После любого ответа выключаем режим ожидания
 			waitingForExitConfirmation = false;
+			return; // выходим из функции, чтобы не проверять остальные команды
 		}
-		else if (isTaskActive)
+
+		//  Если мы не ждем подтверждения, проверяем остальные команды
+		if (isTaskActive)
 		{
-			// --- ПРОВЕРКА ОТВЕТА НА ЗАДАНИЕ ---
-			// Преобразуем ввод в верхний регистр и удаляем небуквенные символы
+			// Логика проверки задания
 			String^ cleanInput = "";
 			for (int i = 0; i < cmd->Length; i++) {
 				if (Char::IsLetter(cmd[i])) {
 					cleanInput += Char::ToUpper(cmd[i]);
 				}
 			}
-			// Ожидаемый ответ берем из динамически сгенерированного поля
+
 			String^ cleanCorrect = correctDecryptedMessage;
 			if (cleanInput == cleanCorrect)
 			{
-				// Успех!
 				isTaskActive = false;
 				serverKey = generateServerKey();
-				// Обновляем Label
 				this->label2->Text = "[УСПЕХ] Задание выполнено! Ключ получен.";
 				textBox1->AppendText("\r\n[Успех!] Сообщение расшифровано верно!");
-				textBox1->AppendText("\r\n=======================================================");
 				textBox1->AppendText("\r\nВаш серверный ключ (SERVERKEY): " + serverKey);
-				textBox1->AppendText("\r\n=======================================================");
-				textBox1->AppendText("\r\nКлюч получен. Нажмите 'В' для выхода или 'Н' для настроек.");
+				textBox1->AppendText("\r\nКлюч получен. Нажмите 'В' для выхода, 'Н' для настроек или 'М' для меню");
 			}
 			else
 			{
@@ -243,9 +243,14 @@ namespace Xakeri {
 			Settings^ settingsForm = gcnew Settings();
 			settingsForm->Show();
 		}
+		else if (cmdLower == "м" || cmdLower == "меню")
+		{
+			this->Hide();
+			Application::OpenForms["MyForm"]->Show();
+		}
 		else if (cmdLower == "в" || cmdLower == "выход")
 		{
-			// Запрос подтверждения выхода
+			// задаем вопрос и включаем режим ожидания
 			textBox1->AppendText("\r\nВы уверены? (y/n)");
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
@@ -263,13 +268,14 @@ namespace Xakeri {
 	private: System::Void Stage4_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Устанавливаем seed для rand
 		srand(static_cast<unsigned int>(time(NULL)));
+		pictureBox1->Image = System::Drawing::Image::FromFile("..\\images\\alp.png");
 		
-		// 1. Генерируем случайный ключ (от 1 до 32)
+		// Генерируем случайный ключ (от 1 до 32)
 		shiftKey = (rand() % (RUSSIAN_ALPHABET_SIZE - 1)) + 1;
-		// 2. Генерируем случайный исходный текст (5 русских букв в верхнем регистре)
+		// Генерируем случайный исходный текст (5 русских букв в верхнем регистре)
 		std::string plainTextStd = generateRandomRussianText(5);
 		correctDecryptedMessage = gcnew String(plainTextStd.c_str());
-		// 3. Шифруем
+		// Шифруем
 		std::string encTextStd = caesarEncrypt(plainTextStd, shiftKey);
 		encryptedMessage = gcnew String(encTextStd.c_str());
 		isTaskActive = true;
