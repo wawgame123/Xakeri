@@ -37,6 +37,8 @@ namespace Xakeri {
 			}
 		}
 
+	protected:
+
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -57,7 +59,7 @@ namespace Xakeri {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(282, 253);
+			this->ClientSize = System::Drawing::Size(459, 409);
 			this->Name = L"Stage1";
 			this->Text = L"Stage1";
 			this->Load += gcnew System::EventHandler(this, &Stage1::Stage1_Load);

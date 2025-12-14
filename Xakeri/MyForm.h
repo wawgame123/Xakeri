@@ -27,7 +27,7 @@ namespace Xakeri {
 			// Настройка TextBox
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
-			textBox1->Font = gcnew Drawing::Font("Consolas", 12);
+			textBox1->Font = gcnew Drawing::Font("Consolas", 36);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
 
@@ -83,10 +83,12 @@ namespace Xakeri {
 			// 
 			this->textBox1->BackColor = System::Drawing::Color::Black;
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->textBox1->Location = System::Drawing::Point(-1, -1);
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->textBox1->Location = System::Drawing::Point(-5, 1);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(364, 368);
+			this->textBox1->Size = System::Drawing::Size(945, 1031);
 			this->textBox1->TabIndex = 0;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
@@ -95,9 +97,11 @@ namespace Xakeri {
 			this->button1->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button1->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button1->FlatAppearance->BorderSize = 0;
-			this->button1->Location = System::Drawing::Point(384, 55);
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button1->Location = System::Drawing::Point(1002, 21);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(174, 33);
+			this->button1->Size = System::Drawing::Size(461, 75);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L" Этап 1";
 			this->button1->UseVisualStyleBackColor = false;
@@ -107,9 +111,11 @@ namespace Xakeri {
 			// 
 			this->button2->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button2->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button2->Location = System::Drawing::Point(384, 94);
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button2->Location = System::Drawing::Point(1002, 144);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(174, 33);
+			this->button2->Size = System::Drawing::Size(461, 75);
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"Этап 2";
 			this->button2->UseVisualStyleBackColor = false;
@@ -119,9 +125,11 @@ namespace Xakeri {
 			// 
 			this->button3->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button3->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button3->Location = System::Drawing::Point(384, 133);
+			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button3->Location = System::Drawing::Point(1002, 243);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(174, 33);
+			this->button3->Size = System::Drawing::Size(461, 75);
 			this->button3->TabIndex = 3;
 			this->button3->Text = L"Этап 3";
 			this->button3->UseVisualStyleBackColor = false;
@@ -131,9 +139,11 @@ namespace Xakeri {
 			// 
 			this->button4->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button4->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button4->Location = System::Drawing::Point(384, 172);
+			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button4->Location = System::Drawing::Point(1002, 346);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(174, 33);
+			this->button4->Size = System::Drawing::Size(461, 75);
 			this->button4->TabIndex = 4;
 			this->button4->Text = L"Этап 4";
 			this->button4->UseVisualStyleBackColor = false;
@@ -143,9 +153,11 @@ namespace Xakeri {
 			// 
 			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button5->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button5->Location = System::Drawing::Point(384, 211);
+			this->button5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button5->Location = System::Drawing::Point(1002, 453);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(174, 33);
+			this->button5->Size = System::Drawing::Size(461, 75);
 			this->button5->TabIndex = 5;
 			this->button5->Text = L"Этап 5";
 			this->button5->UseVisualStyleBackColor = false;
@@ -155,9 +167,11 @@ namespace Xakeri {
 			// 
 			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->button6->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button6->Location = System::Drawing::Point(384, 250);
+			this->button6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button6->Location = System::Drawing::Point(1002, 552);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(174, 33);
+			this->button6->Size = System::Drawing::Size(461, 75);
 			this->button6->TabIndex = 6;
 			this->button6->Text = L"Этап 6";
 			this->button6->UseVisualStyleBackColor = false;
@@ -168,7 +182,7 @@ namespace Xakeri {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->ClientSize = System::Drawing::Size(578, 369);
+			this->ClientSize = System::Drawing::Size(1902, 1033);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -178,6 +192,7 @@ namespace Xakeri {
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"MyForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
