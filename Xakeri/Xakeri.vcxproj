@@ -163,8 +163,20 @@
     <EmbeddedResource Include="Stage1.resx">
       <DependentUpon>Stage1.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Stage2.resx">
+      <DependentUpon>Stage2.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage3.resx">
+      <DependentUpon>Stage3.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Stage4.resx">
       <DependentUpon>Stage4.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage5.resx">
+      <DependentUpon>Stage5.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stage6.resx">
+      <DependentUpon>Stage6.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

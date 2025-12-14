@@ -27,7 +27,7 @@ namespace Xakeri {
 			// Настройка TextBox
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
-			textBox1->Font = gcnew Drawing::Font("Consolas", 36);
+			textBox1->Font = gcnew Drawing::Font("Consolas", 33);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
 
@@ -224,25 +224,54 @@ namespace Xakeri {
 			textBox1->SelectionStart = inputStart;
 		}
 	}
+private: bool waitingForExitConfirmation = false; // новое поле
 
-	private: void ExecuteCommand(String^ cmd)
+private: void ExecuteCommand(String^ cmd)
+{
+	cmd = cmd->ToLower();
+
+	if (waitingForExitConfirmation)
 	{
-		cmd = cmd->ToLower();
-
-		if (cmd == "н" || cmd == "настройки")
-		{
-			Settings^ settingsForm = gcnew Settings();
-			settingsForm->Show();
-		}
-		else if (cmd == "в" || cmd == "выход")
+		// Ждем ответ на подтверждение выхода
+		if (cmd == "y")
 		{
 			Application::Exit();
+		}
+		else if (cmd == "n")
+		{
+			// Отмена выхода — возвращаем прошлый текст
+			textBox1->Text =
+				"Терминал\r\n"
+				"> Настройки - Н, Выход - В\r\n"
+				"> ";
+			inputStart = textBox1->Text->Length;
+			textBox1->SelectionStart = inputStart;
 		}
 		else
 		{
 			textBox1->AppendText("\r\nНеизвестная команда");
 		}
+
+		waitingForExitConfirmation = false; // сброс состояния
 	}
+	else if (cmd == "н" || cmd == "настройки")
+	{
+		Settings^ settingsForm = gcnew Settings();
+		settingsForm->Show();
+	}
+	else if (cmd == "в" || cmd == "выход")
+	{
+		// Запрос подтверждения выхода
+		textBox1->AppendText("\r\nВы уверены? (y/n)");
+		inputStart = textBox1->Text->Length;
+		textBox1->SelectionStart = inputStart;
+		waitingForExitConfirmation = true;
+	}
+	else
+	{
+		textBox1->AppendText("\r\nНеизвестная команда");
+	}
+}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 		Stage6^ stage1Form = gcnew Stage6();
 		stage1Form->Show();
