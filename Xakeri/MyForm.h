@@ -27,7 +27,7 @@ namespace Xakeri {
 			// Настройка TextBox
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
-			textBox1->Font = gcnew Drawing::Font("Consolas", 33);
+			textBox1->Font = gcnew Drawing::Font("Consolas", 22);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
 
@@ -99,7 +99,7 @@ namespace Xakeri {
 			this->button1->FlatAppearance->BorderSize = 0;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button1->Location = System::Drawing::Point(1002, 21);
+			this->button1->Location = System::Drawing::Point(1002, 48);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(461, 75);
 			this->button1->TabIndex = 1;
