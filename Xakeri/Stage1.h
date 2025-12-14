@@ -24,15 +24,11 @@
 			Stage1(void)
 			{
 				InitializeComponent();
-
-				// Настройка TextBox
 				textBox1->BackColor = Color::Black;
 				textBox1->ForeColor = Color::Lime;
 				textBox1->Font = gcnew Drawing::Font("Consolas", 22);
 				textBox1->Multiline = true;
 				textBox1->ScrollBars = ScrollBars::Vertical;
-
-				// Начальный текст терминала
 				textBox1->Text =
 					"Терминал\r\n"
 					"> Настройки - Н, Выход - В\r\n"
@@ -42,21 +38,17 @@
 				textBox1->SelectionStart = inputStart;
 				textBox1->KeyDown += gcnew KeyEventHandler(this, &Stage1::textBox1_KeyDown);
 
-				// Инициализация полей для паролей
 				rnd = gcnew Random();
-				// теперь 4 кнопки
 				buttons = gcnew array<Button^>(4) { this->button1, this->button2, this->button3, this->button4 };
-				buttonType = gcnew array<int>(4); // 0 = easy, 1 = medium, 2 = hard
+				buttonType = gcnew array<int>(4); 
 				passwords = gcnew array<String^>(4);
-
-				// Подключаем общую обработку кликов на кнопках паролей
 				for (int i = 0; i < buttons->Length; i++)
 				{
 					buttons[i]->Click += gcnew EventHandler(this, &Stage1::passwordButton_Click);
 				}
 
-				// Стартовые состояния
-				state = 0; // 0 - ждём лёгкий, 1 - ждём 2 средних, 2 - готово
+				
+				state = 0;
 				mediumSelectedCount = 0;
 				complexPassword = nullptr;
 				ip = nullptr;
@@ -80,7 +72,7 @@
 		private:
 			int inputStart;
 
-			// Новые поля для логики паролей
+		
 			array<Button^>^ buttons;
 			array<int>^ buttonType;
 			array<String^>^ passwords;
@@ -88,9 +80,7 @@
 			String^ complexPassword;
 			String^ ip;
 			int mediumSelectedCount;
-			int state; // 0 = ожидаем выбор лёгкого, 1 = ожидаем выбор двух средних, 2 = закончено
-
-			// Ограничение терминала по строкам, чтобы не засирать
+			int state; 
 			const int MAX_TERMINAL_LINES = 200;
 
 	#pragma region Windows Form Designer generated code
@@ -204,8 +194,6 @@
 				e->SuppressKeyPress = true;
 				return;
 			}
-
-			// Обработка Enter
 			if (e->KeyCode == Keys::Enter)
 			{
 				e->SuppressKeyPress = true;
@@ -245,7 +233,7 @@
 		{
 			cmd = cmd->Trim()->ToLower();
 
-			// МЕНЮ — ВСЕГДА ДОСТУПНО
+		
 			if (cmd == "м" || cmd == "m" || cmd == "меню")
 			{
 				auto form = Application::OpenForms["MyForm"];
@@ -257,6 +245,14 @@
 				return;
 			}
 
+			
+			if (cmd == "п" || cmd == "проверка")
+			{
+				
+				return;
+			}
+
+		
 			if (waitingForExitConfirmation)
 			{
 				if (cmd == "y")
@@ -269,6 +265,8 @@
 						"Терминал\r\n"
 						"> Настройки - Н, Выход - В\r\n"
 						"> ";
+					inputStart = textBox1->Text->Length;
+					textBox1->SelectionStart = inputStart;
 				}
 				else
 				{
@@ -279,16 +277,19 @@
 				return;
 			}
 
-			else if (cmd == "н" || cmd == "настройки")
+			
+			if (cmd == "н" || cmd == "настройки")
 			{
 				Settings^ settingsForm = gcnew Settings();
 				settingsForm->Show();
 			}
+		
 			else if (cmd == "в" || cmd == "выход")
 			{
 				AppendTerminal("Вы уверены? (y/n)");
 				waitingForExitConfirmation = true;
 			}
+			
 			else
 			{
 				AppendTerminal("Неизвестная команда");
