@@ -295,7 +295,7 @@ namespace Xakeri {
 		cmd = cmd->ToLower();
 
 		// команда меню Ч доступна “ќЋ№ ќ после выдачи логина
-		if (cmd == "м" || cmd == "m");
+		if (cmd == "м" || cmd == "m")
 		{
 			if (!loginGiven)
 			{
@@ -303,7 +303,7 @@ namespace Xakeri {
 				return;
 			}
 
-			// если логин выдан Ч можно вернутьс€ в меню (или показывать форму)
+		
 			if (Application::OpenForms["MyForm"] != nullptr)
 			{
 				Application::OpenForms["MyForm"]->Show();
