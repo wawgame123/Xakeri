@@ -55,6 +55,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ button7;
 
 	private:
 		int inputStart;
@@ -69,6 +70,7 @@ namespace Xakeri {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -150,12 +152,25 @@ namespace Xakeri {
 			this->button6->UseVisualStyleBackColor = false;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button7->FlatAppearance->BorderColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button7->Location = System::Drawing::Point(384, 289);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(174, 33);
+			this->button7->TabIndex = 7;
+			this->button7->Text = L"Этап 7";
+			this->button7->UseVisualStyleBackColor = false;
+			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(578, 369);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -218,6 +233,8 @@ namespace Xakeri {
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
