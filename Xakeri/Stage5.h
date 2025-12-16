@@ -62,6 +62,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private:
 		int inputStart;
 
@@ -80,9 +81,11 @@ namespace Xakeri {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -258,12 +261,23 @@ namespace Xakeri {
 			this->pictureBox1->TabIndex = 8;
 			this->pictureBox1->TabStop = false;
 			// 
+			// pictureBox3
+			// 
+			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
+			this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox3->Location = System::Drawing::Point(780, 1);
+			this->pictureBox3->Name = L"pictureBox3";
+			this->pictureBox3->Size = System::Drawing::Size(118, 38);
+			this->pictureBox3->TabIndex = 10;
+			this->pictureBox3->TabStop = false;
+			// 
 			// Stage5
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1902, 1033);
+			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
@@ -279,6 +293,7 @@ namespace Xakeri {
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -440,12 +455,12 @@ namespace Xakeri {
 		pictureBox2->SendToBack(); // отправить на задний план
 
 		srand(time(0));
-		label2->Location = System::Drawing::Point(ranx(10,270), rany(0, 850));
-		label3->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label4->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label5->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label6->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label7->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label2->Location = System::Drawing::Point(ranx(10,200), rany(0, 600));
+		label3->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label4->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label5->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label6->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label7->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
 
 	}
 

@@ -64,8 +64,11 @@ namespace Xakeri {
 		String^ correctDecryptedMessage; // Заглавные, чтобы избежать ошибок регистра при проверке
 		int shiftKey; // Ключ, на который было зашифровано
 		bool isTaskActive = false; // Флаг активности задания
-	private: System::Windows::Forms::Label^ label2;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox3;
+	private: System::Windows::Forms::Label^ label1;
 		   // Пароль для следующего этапа
 		   String^ serverKey = "";
 #pragma region Windows Form Designer generated code
@@ -73,9 +76,13 @@ namespace Xakeri {
 		   {
 			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stage4::typeid));
 			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			   this->label2 = (gcnew System::Windows::Forms::Label());
 			   this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			   this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			   this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
+			   this->label1 = (gcnew System::Windows::Forms::Label());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			   this->SuspendLayout();
 			   // 
 			   // textBox1
@@ -84,6 +91,7 @@ namespace Xakeri {
 			   this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			   this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
+			   this->textBox1->ForeColor = System::Drawing::SystemColors::MenuBar;
 			   this->textBox1->Location = System::Drawing::Point(-5, 1);
 			   this->textBox1->Multiline = true;
 			   this->textBox1->Name = L"textBox1";
@@ -91,37 +99,65 @@ namespace Xakeri {
 			   this->textBox1->TabIndex = 0;
 			   this->textBox1->TextChanged += gcnew System::EventHandler(this, &Stage4::textBox1_TextChanged);
 			   // 
-			   // label2
-			   // 
-			   this->label2->AutoSize = true;
-			   this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(204)));
-			   this->label2->Location = System::Drawing::Point(959, 19);
-			   this->label2->Name = L"label2";
-			   this->label2->Size = System::Drawing::Size(126, 46);
-			   this->label2->TabIndex = 2;
-			   this->label2->Text = L"label2";
-			   // 
 			   // pictureBox1
 			   // 
+			   this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			   this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			   this->pictureBox1->InitialImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.InitialImage")));
-			   this->pictureBox1->Location = System::Drawing::Point(967, 337);
+			   this->pictureBox1->Location = System::Drawing::Point(981, 467);
 			   this->pictureBox1->Name = L"pictureBox1";
-			   this->pictureBox1->Size = System::Drawing::Size(913, 560);
+			   this->pictureBox1->Size = System::Drawing::Size(851, 522);
 			   this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			   this->pictureBox1->TabIndex = 3;
 			   this->pictureBox1->TabStop = false;
+			   // 
+			   // pictureBox2
+			   // 
+			   this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			   this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->pictureBox2->Location = System::Drawing::Point(780, 1);
+			   this->pictureBox2->Name = L"pictureBox2";
+			   this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			   this->pictureBox2->TabIndex = 9;
+			   this->pictureBox2->TabStop = false;
+			   // 
+			   // pictureBox3
+			   // 
+			   this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
+			   this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->pictureBox3->Location = System::Drawing::Point(939, 1);
+			   this->pictureBox3->Name = L"pictureBox3";
+			   this->pictureBox3->Size = System::Drawing::Size(970, 1031);
+			   this->pictureBox3->TabIndex = 12;
+			   this->pictureBox3->TabStop = false;
+			   // 
+			   // label1
+			   // 
+			   this->label1->AutoSize = true;
+			   this->label1->BackColor = System::Drawing::Color::Transparent;
+			   this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(204)));
+			   this->label1->ForeColor = System::Drawing::SystemColors::Control;
+			   this->label1->Location = System::Drawing::Point(1040, 112);
+			   this->label1->Name = L"label1";
+			   this->label1->Size = System::Drawing::Size(109, 39);
+			   this->label1->TabIndex = 13;
+			   this->label1->Text = L"label1";
 			   // 
 			   // Stage4
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			   this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			   this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->ClientSize = System::Drawing::Size(1902, 1033);
+			   this->Controls->Add(this->label1);
+			   this->Controls->Add(this->pictureBox3);
+			   this->Controls->Add(this->pictureBox2);
 			   this->Controls->Add(this->pictureBox1);
-			   this->Controls->Add(this->label2);
 			   this->Controls->Add(this->textBox1);
+			   this->DoubleBuffered = true;
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			   this->MaximizeBox = false;
 			   this->MinimizeBox = false;
@@ -130,6 +166,8 @@ namespace Xakeri {
 			   this->Text = L"А мне карбонара больше нравится";
 			   this->Load += gcnew System::EventHandler(this, &Stage4::Stage4_Load);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			   this->ResumeLayout(false);
 			   this->PerformLayout();
 
@@ -240,7 +278,7 @@ namespace Xakeri {
 				// записываем serverKey в файл
 				WriteServerKeyToResultsFile(serverKey);
 
-				this->label2->Text = "[УСПЕХ] Задание выполнено! Ключ получен.";
+				this->label1->Text = "[УСПЕХ] Задание выполнено! Ключ получен.";
 				textBox1->AppendText("\r\n[Успех!] Сообщение расшифровано верно!");
 				textBox1->AppendText("\r\nВаш серверный ключ (SERVERKEY): " + serverKey);
 				textBox1->AppendText("\r\nКлюч получен. Нажмите 'В' для выхода, 'Н' для настроек или 'М' для меню");
@@ -285,9 +323,10 @@ namespace Xakeri {
 		}
 	}
 	private: System::Void Stage4_Load(System::Object^ sender, System::EventArgs^ e) {
+		pictureBox3->SendToBack();
 		// Устанавливаем seed для rand
 		srand(static_cast<unsigned int>(time(NULL)));
-		pictureBox1->Image = System::Drawing::Image::FromFile("..\\images\\alp.png");
+		pictureBox1->Image = System::Drawing::Image::FromFile("..\\images\\alph.png");
 
 		// Генерируем случайный ключ (от 1 до 32)
 		shiftKey = (rand() % (RUSSIAN_ALPHABET_SIZE - 1)) + 1;
@@ -298,7 +337,7 @@ namespace Xakeri {
 		std::string encTextStd = caesarEncrypt(plainTextStd, shiftKey);
 		encryptedMessage = gcnew String(encTextStd.c_str());
 		isTaskActive = true;
-		// 4. Формируем текст задания для label2
+		//Формируем текст задания для label2
 		String^ russianAlphabetDisplay = gcnew String(RUSSIAN_ALPHABET_UPPER.c_str());
 		String^ taskText =
 			"Этап 4. Шифр Цезаря\r\n"
@@ -306,7 +345,7 @@ namespace Xakeri {
 			"Зашифровано: \r\n" + encryptedMessage + "\r\n"
 			"Сдвиг (Ключ): \r\n" + shiftKey.ToString() + "\r\n"
 			"Введите расшифрованный текст";
-		this->label2->Text = taskText;
+		this->label1->Text = taskText;
 		// Очищаем терминал
 		textBox1->Text = "> ";
 		inputStart = textBox1->Text->Length;

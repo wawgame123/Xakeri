@@ -51,13 +51,17 @@ namespace Xakeri {
 		}
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::ComponentModel::Container^ components;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private:
 		int inputStart;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stage6::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -73,18 +77,30 @@ namespace Xakeri {
 			this->textBox1->TabIndex = 0;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Stage6::textBox1_TextChanged);
 			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox2->Location = System::Drawing::Point(779, 1);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			this->pictureBox2->TabIndex = 9;
+			this->pictureBox2->TabStop = false;
+			// 
 			// Stage6
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1902, 1033);
+			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Stage6";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Stage6";
 			this->Load += gcnew System::EventHandler(this, &Stage6::Stage6_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
