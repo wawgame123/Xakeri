@@ -25,13 +25,13 @@ namespace Xakeri {
 		Stage4(void)
 		{
 			InitializeComponent();
-			// Настройка TextBox
+			
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
 			textBox1->Font = gcnew Drawing::Font("Consolas", 33);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
-			// Начальный текст терминала
+			
 			textBox1->Text =
 				"Терминал\r\n"
 				"> Настройки - Н, Выход - В, Меню - М\r\n"

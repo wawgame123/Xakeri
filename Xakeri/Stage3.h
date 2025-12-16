@@ -15,6 +15,7 @@ namespace Xakeri {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	public ref class Stage3 : public System::Windows::Forms::Form
 	{
@@ -33,13 +34,20 @@ namespace Xakeri {
 				L"> ";
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
+
 			textBox1->KeyDown += gcnew KeyEventHandler(this, &Stage3::textBox1_KeyDown);
+			textBox1->KeyUp += gcnew KeyEventHandler(this, &Stage3::textBox1_KeyUp);
+			textBox1->MouseDown += gcnew MouseEventHandler(this, &Stage3::textBox1_MouseDown);
+			textBox1->MouseUp += gcnew MouseEventHandler(this, &Stage3::textBox1_MouseUp);
+			textBox1->Click += gcnew EventHandler(this, &Stage3::textBox1_Click);
+
 			rng = gcnew Random();
+			passwordObtained = false;
+			consecutiveCorrect = 0;
 			InitializeDocuments();
+			ClearPasswordLineAtStartup();
 			ShuffleIndices();
 			currentIndex = -1;
-			consecutiveCorrect = 0;
-			passwordObtained = false;
 			ShowNextDocument();
 		}
 	protected:
@@ -65,6 +73,7 @@ namespace Xakeri {
 		bool passwordObtained;
 		String^ password;
 		Random^ rng;
+
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
@@ -138,24 +147,96 @@ namespace Xakeri {
 
 		}
 #pragma endregion
+
 	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 	{
-		if (textBox1->SelectionStart < inputStart &&
-			(e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete))
-		{
-			e->SuppressKeyPress = true;
-			return;
-		}
+		int selStart = textBox1->SelectionStart;
+		int selLen = textBox1->SelectionLength;
+
 		if (e->KeyCode == Keys::Enter)
 		{
 			e->SuppressKeyPress = true;
-			String^ command = textBox1->Text->Substring(inputStart)->Trim();
-			ExecuteCommand(command);
-			textBox1->AppendText(L"\r\n>");
+			String^ cmd = textBox1->Text->Substring(inputStart)->Trim();
+			ExecuteCommand(cmd);
+			textBox1->AppendText(L"\r\n> ");
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
+			return;
+		}
+
+		if (e->Control && e->KeyCode == Keys::A)
+		{
+			e->SuppressKeyPress = true;
+			textBox1->SelectionStart = inputStart;
+			textBox1->SelectionLength = textBox1->Text->Length - inputStart;
+			return;
+		}
+
+		if (e->Control && (e->KeyCode == Keys::X || e->KeyCode == Keys::C))
+		{
+			if (selStart < inputStart)
+			{
+				e->SuppressKeyPress = true;
+				return;
+			}
+		}
+
+		if (e->Control && e->KeyCode == Keys::V)
+		{
+			if (selStart < inputStart)
+				textBox1->SelectionStart = inputStart;
+			return;
+		}
+
+		if (e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete)
+		{
+			if (selStart < inputStart)
+			{
+				e->SuppressKeyPress = true;
+				return;
+			}
+			if (e->KeyCode == Keys::Back && selStart == inputStart)
+			{
+				e->SuppressKeyPress = true;
+				return;
+			}
 		}
 	}
+
+	private: System::Void textBox1_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+	{
+		EnsureCaretNotBeforeInput();
+	}
+
+	private: System::Void textBox1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+	{
+		int clickedPos = textBox1->GetCharIndexFromPosition(Point(e->X, e->Y));
+		if (clickedPos < inputStart)
+		{
+			textBox1->SelectionStart = inputStart;
+			textBox1->SelectionLength = 0;
+		}
+	}
+
+	private: System::Void textBox1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+	{
+		EnsureCaretNotBeforeInput();
+	}
+
+	private: System::Void textBox1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		EnsureCaretNotBeforeInput();
+	}
+
+	private: void EnsureCaretNotBeforeInput()
+	{
+		if (textBox1->SelectionStart < inputStart)
+		{
+			textBox1->SelectionStart = inputStart;
+			textBox1->SelectionLength = 0;
+		}
+	}
+
 	private: bool waitingForExitConfirmation = false;
 	private: void ExecuteCommand(String^ cmd)
 	{
@@ -203,14 +284,39 @@ namespace Xakeri {
 			textBox1->SelectionStart = inputStart;
 			waitingForExitConfirmation = true;
 		}
+		else if (cmd == L"м" || cmd == L"m")
+		{
+			if (!passwordObtained)
+			{
+				textBox1->AppendText(L"\r\nПароль не получен");
+				return;
+			}
+			Form^ f = Application::OpenForms["MyForm"];
+			if (f != nullptr)
+			{
+				this->Hide();
+				f->Show();
+			}
+			else
+			{
+				textBox1->AppendText(L"\r\nMyForm не найден");
+			}
+		}
 		else
 		{
 			textBox1->AppendText(L"\r\nНеизвестная команда");
 		}
 	}
+
 	private: System::Void Stage3_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (textBox1->Text->Length < inputStart)
+		{
+			textBox1->AppendText(L"\r\n> ");
+			inputStart = textBox1->Text->Length;
+			textBox1->SelectionStart = inputStart;
+		}
 	}
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -269,7 +375,10 @@ namespace Xakeri {
 			buf[i] = wchar_t('a' + r);
 		}
 		password = gcnew String(buf);
-		textBox1->AppendText(L"\r\n> Пароль получен: " + password);
+		textBox1->AppendText(L"\r\n> Пароль получен: " + password + L"\r\n> ");
+		inputStart = textBox1->Text->Length;
+		textBox1->SelectionStart = inputStart;
+
 		passwordObtained = true;
 		for each (Control ^ c in this->Controls)
 		{
@@ -281,6 +390,7 @@ namespace Xakeri {
 		}
 		button1->Enabled = false;
 		button2->Enabled = false;
+		WritePasswordToResultsFile(password);
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -301,6 +411,8 @@ namespace Xakeri {
 			consecutiveCorrect = 0;
 			textBox1->AppendText(L"\r\nНеправильно");
 		}
+		inputStart = textBox1->Text->Length;
+		textBox1->SelectionStart = inputStart;
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -320,6 +432,79 @@ namespace Xakeri {
 		{
 			consecutiveCorrect = 0;
 			textBox1->AppendText(L"\r\nНеправильно");
+		}
+		inputStart = textBox1->Text->Length;
+		textBox1->SelectionStart = inputStart;
+	}
+
+	private: void ClearPasswordLineAtStartup()
+	{
+		try
+		{
+			String^ dir = Path::Combine(Application::StartupPath, "stages");
+			String^ path = Path::Combine(dir, "Results.txt");
+			if (!Directory::Exists(dir)) Directory::CreateDirectory(dir);
+			array<String^>^ lines;
+			if (File::Exists(path))
+			{
+				lines = File::ReadAllLines(path);
+			}
+			else
+			{
+				lines = gcnew array<String^>(3);
+				for (int i = 0; i < 3; i++) lines[i] = "";
+				File::WriteAllLines(path, lines);
+			}
+			if (lines->Length < 3)
+			{
+				array<String^>^ newLines = gcnew array<String^>(3);
+				for (int i = 0; i < 3; i++)
+				{
+					if (i < lines->Length) newLines[i] = lines[i];
+					else newLines[i] = "";
+				}
+				lines = newLines;
+			}
+			lines[2] = "Password:";
+			File::WriteAllLines(path, lines);
+		}
+		catch (Exception^)
+		{
+		}
+	}
+
+	private: void WritePasswordToResultsFile(String^ pwd)
+	{
+		try
+		{
+			String^ dir = Path::Combine(Application::StartupPath, "stages");
+			String^ path = Path::Combine(dir, "Results.txt");
+			if (!Directory::Exists(dir)) Directory::CreateDirectory(dir);
+			array<String^>^ lines;
+			if (File::Exists(path))
+			{
+				lines = File::ReadAllLines(path);
+			}
+			else
+			{
+				lines = gcnew array<String^>(3);
+				for (int i = 0; i < 3; i++) lines[i] = "";
+			}
+			if (lines->Length < 3)
+			{
+				array<String^>^ newLines = gcnew array<String^>(3);
+				for (int i = 0; i < 3; i++)
+				{
+					if (i < lines->Length) newLines[i] = lines[i];
+					else newLines[i] = "";
+				}
+				lines = newLines;
+			}
+			lines[2] = "Password: " + pwd;
+			File::WriteAllLines(path, lines);
+		}
+		catch (Exception^)
+		{
 		}
 	}
 	};
