@@ -19,19 +19,21 @@ namespace Xakeri {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
+
 	public ref class Stage4 : public System::Windows::Forms::Form
 	{
 	public:
 		Stage4(void)
 		{
 			InitializeComponent();
-			
+
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
 			textBox1->Font = gcnew Drawing::Font("Consolas", 33);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
-			
+
 			textBox1->Text =
 				"Терминал\r\n"
 				"> Настройки - Н, Выход - В, Меню - М\r\n"
@@ -39,6 +41,10 @@ namespace Xakeri {
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
 			textBox1->KeyDown += gcnew KeyEventHandler(this, &Stage4::textBox1_KeyDown);
+
+			// очищаем строку serverKey при запуске, как просили
+			ClearServerKeyLineAtStartup();
+
 		}
 	protected:
 		~Stage4()
@@ -165,11 +171,12 @@ namespace Xakeri {
 		   // Функция для генерации serverkey
 		   String^ generateServerKey() {
 			   int random_part = rand() % 10000;
-			   return "SERVERKEY_S4_" + random_part.ToString();
+			   return "SERVERKEY_S4_" + System::Convert::ToString(random_part);
 		   }
+
 	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 	{
-	
+
 		// Запрет удаления прошлого текста
 		if (textBox1->SelectionStart < inputStart &&
 			(e->KeyCode == Keys::Back || e->KeyCode == Keys::Delete))
@@ -230,6 +237,9 @@ namespace Xakeri {
 			{
 				isTaskActive = false;
 				serverKey = generateServerKey();
+				// записываем serverKey в файл
+				WriteServerKeyToResultsFile(serverKey);
+
 				this->label2->Text = "[УСПЕХ] Задание выполнено! Ключ получен.";
 				textBox1->AppendText("\r\n[Успех!] Сообщение расшифровано верно!");
 				textBox1->AppendText("\r\nВаш серверный ключ (SERVERKEY): " + serverKey);
@@ -248,7 +258,14 @@ namespace Xakeri {
 		else if (cmdLower == "м" || cmdLower == "меню")
 		{
 			this->Hide();
-			Application::OpenForms["MyForm"]->Show();
+			Form^ f = Application::OpenForms["MyForm"];
+			if (f != nullptr) {
+				f->Show();
+			}
+			else {
+				textBox1->AppendText("\r\nMyForm не найден");
+				this->Show();
+			}
 		}
 		else if (cmdLower == "в" || cmdLower == "выход")
 		{
@@ -271,7 +288,7 @@ namespace Xakeri {
 		// Устанавливаем seed для rand
 		srand(static_cast<unsigned int>(time(NULL)));
 		pictureBox1->Image = System::Drawing::Image::FromFile("..\\images\\alp.png");
-		
+
 		// Генерируем случайный ключ (от 1 до 32)
 		shiftKey = (rand() % (RUSSIAN_ALPHABET_SIZE - 1)) + 1;
 		// Генерируем случайный исходный текст (5 русских букв в верхнем регистре)
@@ -296,6 +313,83 @@ namespace Xakeri {
 		textBox1->SelectionStart = inputStart;
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+		   // --- Добавленные функции для работы с файлом Results.txt (4-я строка: serverKey:)
+	private: void ClearServerKeyLineAtStartup()
+	{
+		try
+		{
+			String^ dir = Path::Combine(Application::StartupPath, "stages");
+			String^ path = Path::Combine(dir, "Results.txt");
+			if (!Directory::Exists(dir)) Directory::CreateDirectory(dir);
+
+			array<String^>^ lines;
+			if (File::Exists(path))
+			{
+				lines = File::ReadAllLines(path);
+			}
+			else
+			{
+				lines = gcnew array<String^>(4);
+				for (int i = 0; i < 4; i++) lines[i] = "";
+				File::WriteAllLines(path, lines);
+			}
+
+			if (lines->Length < 4)
+			{
+				array<String^>^ newLines = gcnew array<String^>(4);
+				for (int i = 0; i < 4; i++)
+				{
+					if (i < lines->Length) newLines[i] = lines[i];
+					else newLines[i] = "";
+				}
+				lines = newLines;
+			}
+
+			lines[3] = "serverKey:";
+			File::WriteAllLines(path, lines);
+		}
+		catch (Exception^)
+		{
+		}
+	}
+
+	private: void WriteServerKeyToResultsFile(String^ sk)
+	{
+		try
+		{
+			String^ dir = Path::Combine(Application::StartupPath, "stages");
+			String^ path = Path::Combine(dir, "Results.txt");
+			if (!Directory::Exists(dir)) Directory::CreateDirectory(dir);
+
+			array<String^>^ lines;
+			if (File::Exists(path))
+			{
+				lines = File::ReadAllLines(path);
+			}
+			else
+			{
+				lines = gcnew array<String^>(4);
+				for (int i = 0; i < 4; i++) lines[i] = "";
+			}
+
+			if (lines->Length < 4)
+			{
+				array<String^>^ newLines = gcnew array<String^>(4);
+				for (int i = 0; i < 4; i++)
+				{
+					if (i < lines->Length) newLines[i] = lines[i];
+					else newLines[i] = "";
+				}
+				lines = newLines;
+			}
+
+			lines[3] = "serverKey: " + sk;
+			File::WriteAllLines(path, lines);
+		}
+		catch (Exception^)
+		{
+		}
 	}
 	};
 }
