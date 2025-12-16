@@ -110,11 +110,11 @@ namespace Xakeri {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 28.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(982, 96);
+			this->label1->Location = System::Drawing::Point(958, 113);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(0, 54);
+			this->label1->Size = System::Drawing::Size(0, 52);
 			this->label1->TabIndex = 3;
 			this->label1->Click += gcnew System::EventHandler(this, &Stage3::label1_Click);
 			// 
@@ -130,7 +130,7 @@ namespace Xakeri {
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"Stage3";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Кто-то сказал: Права администратора\?";
 			this->Load += gcnew System::EventHandler(this, &Stage3::Stage3_Load);
 			this->ResumeLayout(false);

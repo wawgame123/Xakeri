@@ -18,6 +18,7 @@ namespace Xakeri {
 	using namespace System::Drawing;
 	using namespace System::IO;
 	using namespace System::Text;
+	using namespace System::Collections::Generic;
 
 	public ref class Stage2 : public System::Windows::Forms::Form
 	{
@@ -74,7 +75,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Label^ label1;
 		   String^ currentEmail;
 
-		   // флаг: логин уже выдан
+		 
 		   bool loginGiven;
 
 #pragma region Windows Form Designer generated code
@@ -197,9 +198,9 @@ namespace Xakeri {
 	private: void LoadFile(int fileNumber)
 	{
 		currentFileNumber = fileNumber;
-		// Попробуем искать папку fish в родительской папке exe (как у вас в проекте)
-		String^ basePath = Directory::GetParent(Application::StartupPath)->FullName;
-		String^ path = Path::Combine(basePath, "fish", fileNumber.ToString() + ".txt");
+		
+		String^ path = Application::StartupPath + "\\fish\\" + fileNumber.ToString() + ".txt";
+
 
 
 		checkBox1->Checked = false;
@@ -294,139 +295,27 @@ namespace Xakeri {
 	{
 		cmd = cmd->ToLower();
 
-		// команда меню — доступна ТОЛЬКО после выдачи логина
 		if (cmd == "м" || cmd == "m")
 		{
 			if (!loginGiven)
 			{
-				textBox1->AppendText("\r\nСначала получите логин (выполните проверку)");
+				textBox1->AppendText("\r\nСначала получите логин");
 				return;
 			}
 
-		
 			if (Application::OpenForms["MyForm"] != nullptr)
 			{
 				Application::OpenForms["MyForm"]->Show();
 			}
 			else
 			{
-				
 			}
 			this->Hide();
 			return;
 		}
 
-		// обработка подтверждения выхода: запрет если логин не выдан
-		if (waitingForExitConfirmation)
-		{
-			// если пользователь как-то попал в режим подтверждения до выдачи логина — запретим дальнейшие действия
-			if (!loginGiven)
-			{
-				textBox1->AppendText("\r\nВыход доступен только после получения логина");
-				waitingForExitConfirmation = false;
-				return;
-			}
-
-			if (cmd == "y")
-			{
-				bool correct = false;
-
-				switch (currentFileNumber)
-				{
-				case 1:
-					correct = (checkBox1->Checked == true && checkBox2->Checked == true);
-					break;
-				case 2:
-				case 3:
-					correct = (checkBox1->Checked == true && checkBox2->Checked == false);
-					break;
-				case 4:
-				case 5:
-					correct = (checkBox1->Checked == false && checkBox2->Checked == true);
-					break;
-				default:
-					correct = false;
-					break;
-				}
-
-				if (correct)
-				{
-					if (!loginGiven)
-					{
-						int len = rnd->Next(5, 8);
-						StringBuilder^ sb = gcnew StringBuilder();
-						for (int i = 0; i < len; i++)
-						{
-							wchar_t ch = (wchar_t)('a' + rnd->Next(0, 26));
-							sb->Append(ch);
-						}
-						String^ login = sb->ToString();
-
-						textBox1->AppendText("\r\nУспешно! login: " + login);
-						loginGiven = true;
-						textBox1->AppendText("\r\nвведите м чтобы попасть в меню");
-					}
-					else
-					{
-						textBox1->AppendText("\r\nЛогин уже выдан. введите м чтобы попасть в меню");
-					}
-				}
-				else
-				{
-					textBox1->AppendText("\r\nНеправильно — загружаю другой файл и сбрасываю чекбоксы.");
-					LoadRandomFile();
-				}
-			}
-			else if (cmd == "n")
-			{
-
-				textBox1->Text =
-					"Терминал\r\n"
-					"> Настройки - Н, Выход - В, Проверка - П\r\n"
-					"> ";
-				inputStart = textBox1->Text->Length;
-				textBox1->SelectionStart = inputStart;
-			}
-			else
-			{
-				textBox1->AppendText("\r\nНеизвестная команда");
-			}
-
-			waitingForExitConfirmation = false;
-			return;
-		}
-
-		// Команда настройки — оставил доступной до выдачи логина
-		if (cmd == "н" || cmd == "настройки")
-		{
-			if (Application::OpenForms["MyForm"] != nullptr)
-			{
-				Application::OpenForms["MyForm"]->Show();
-			}
-			this->Hide();
-			return;
-		}
-
-		// Команда выхода — разрешена только после выдачи логина
-		if (cmd == "в" || cmd == "выход")
-		{
-			if (!loginGiven)
-			{
-				textBox1->AppendText("\r\nВыход доступен только после получения логина");
-				return;
-			}
-
-			textBox1->AppendText("\r\nВы уверены? (y/n)");
-			inputStart = textBox1->Text->Length;
-			textBox1->SelectionStart = inputStart;
-			waitingForExitConfirmation = true;
-			return;
-		}
-
-		// Команда ПРОВЕРКА: П или "проверка"
 		if (cmd == "п" || cmd == "проверка")
 		{
-			// если логин уже выдан — информируем и подсказываем меню
 			if (loginGiven)
 			{
 				textBox1->AppendText("\r\nЛогин уже выдан. введите м чтобы попасть в меню");
@@ -434,19 +323,18 @@ namespace Xakeri {
 			}
 
 			bool correct = false;
-
 			switch (currentFileNumber)
 			{
 			case 1:
-				correct = (checkBox1->Checked == true && checkBox2->Checked == true);
+				correct = (checkBox1->Checked && checkBox2->Checked);
 				break;
 			case 2:
 			case 3:
-				correct = (checkBox1->Checked == true && checkBox2->Checked == false);
+				correct = (checkBox1->Checked && !checkBox2->Checked);
 				break;
 			case 4:
 			case 5:
-				correct = (checkBox1->Checked == false && checkBox2->Checked == true);
+				correct = (!checkBox1->Checked && checkBox2->Checked);
 				break;
 			default:
 				correct = false;
@@ -464,10 +352,38 @@ namespace Xakeri {
 				}
 				String^ login = sb->ToString();
 
-				textBox1->AppendText("\r\nПравильно");
-				textBox1->AppendText("\r\nlogin: " + login);
+				textBox1->AppendText("\r\nПравильно\r\nlogin: " + login);
 				loginGiven = true;
 				textBox1->AppendText("\r\nвведите м чтобы попасть в меню");
+
+				try
+				{
+					String^ stagesDir = Path::Combine(Application::StartupPath, "stages");
+					Directory::CreateDirectory(stagesDir);
+					String^ filePath = Path::Combine(stagesDir, "Results.txt");
+
+					List<String^>^ lines = gcnew List<String^>();
+					if (File::Exists(filePath))
+					{
+						lines->AddRange(File::ReadAllLines(filePath, Encoding::UTF8));
+					}
+
+					if (lines->Count < 2)
+					{
+						if (lines->Count == 0) lines->Add("Ip: ");
+						lines->Add("Login: " + login);
+					}
+					else
+					{
+						lines[1] = "Login: " + login;
+					}
+
+					File::WriteAllLines(filePath, lines->ToArray(), Encoding::UTF8);
+				}
+				catch (Exception^ ex)
+				{
+					textBox1->AppendText("\r\nОшибка записи логина: " + ex->Message);
+				}
 			}
 			else
 			{
@@ -477,13 +393,62 @@ namespace Xakeri {
 			return;
 		}
 
+		
 		textBox1->AppendText("\r\nНеизвестная команда");
 	}
-	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e) {
+
+	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e)
+	{
+
+		try
+		{
+			String^ stagesDir = Path::Combine(Application::StartupPath, "stages");
+			Directory::CreateDirectory(stagesDir);
+
+			String^ filePath = Path::Combine(stagesDir, "Results.txt");
+
+			List<String^>^ lines = gcnew List<String^>();
+
+			if (File::Exists(filePath))
+			{
+				lines->AddRange(File::ReadAllLines(filePath, Encoding::UTF8));
+			}
+
+			if (lines->Count == 0)
+			{
+				lines->Add("Ip: ");
+				lines->Add("Login: ");
+			}
+			else if (lines->Count == 1)
+			{
+				if (lines[0]->StartsWith("Ip:"))
+				{
+					lines->Add("Login: ");
+				}
+				else
+				{
+					lines->Insert(0, "Ip: ");
+					lines->Insert(1, "Login: ");
+				}
+			}
+			else
+			{
+
+				lines[1] = "Login: ";
+			}
+
+			File::WriteAllLines(filePath, lines->ToArray(), Encoding::UTF8);
+		}
+		catch (...)
+		{
+
+		}
+
 		currentFileNumber = -1;
-		int startNum = rnd->Next(1, 6); // 1..5
+		int startNum = rnd->Next(1, 6);
 		LoadFile(startNum);
 	}
+
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
