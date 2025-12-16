@@ -35,7 +35,7 @@ namespace Xakeri {
 			// Начальный текст терминала
 			textBox1->Text =
 				"Терминал\r\n"
-				"> Настройки - Н, Выход - В\r\n"
+				"> Настройки - Н, Выход - В, Проверить - П\r\n"
 				"> ";
 
 			inputStart = textBox1->Text->Length;
@@ -60,6 +60,8 @@ namespace Xakeri {
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private:
 		int inputStart;
 
@@ -76,7 +78,11 @@ namespace Xakeri {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -111,7 +117,7 @@ namespace Xakeri {
 			this->label2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->label2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label2.Image")));
 			this->label2->ImageAlign = System::Drawing::ContentAlignment::MiddleRight;
-			this->label2->Location = System::Drawing::Point(3, 523);
+			this->label2->Location = System::Drawing::Point(43, 496);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(532, 63);
 			this->label2->TabIndex = 2;
@@ -219,6 +225,8 @@ namespace Xakeri {
 			// 
 			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
 			this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->panel1->Controls->Add(this->pictureBox2);
+			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Controls->Add(this->label5);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label7);
@@ -229,6 +237,26 @@ namespace Xakeri {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(962, 1038);
 			this->panel1->TabIndex = 8;
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->pictureBox1->Location = System::Drawing::Point(14, 589);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(939, 431);
+			this->pictureBox1->TabIndex = 8;
+			this->pictureBox1->TabStop = false;
+			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->pictureBox2->Location = System::Drawing::Point(9, 11);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(939, 431);
+			this->pictureBox2->TabIndex = 9;
+			this->pictureBox2->TabStop = false;
 			// 
 			// Stage5
 			// 
@@ -247,12 +275,29 @@ namespace Xakeri {
 			this->Load += gcnew System::EventHandler(this, &Stage5::Stage5_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 		Point startPoint;
+		bool IsLabelInsidePictureBox(System::Windows::Forms::Label^ lbl,
+			System::Windows::Forms::PictureBox^ pb)
+		{
+			int leftX = pb->Location.X;
+			int rightX = pb->Location.X + pb->Width;
+			int topY = pb->Location.Y;
+			int bottomY = pb->Location.Y + pb->Height;
+
+			return (lbl->Location.X >= leftX &&
+				(lbl->Location.X + lbl->Width) <= rightX &&
+				lbl->Location.Y >= topY &&
+				(lbl->Location.Y + lbl->Height) <= bottomY);
+		}
+
+
 	private: System::Void textBox1_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 	{
 
@@ -299,6 +344,10 @@ namespace Xakeri {
 			
 			   return x;
 		   }
+		   
+		   
+		
+
 	private: void ExecuteCommand(String^ cmd)
 	{
 		cmd = cmd->ToLower();
@@ -340,19 +389,61 @@ namespace Xakeri {
 			textBox1->SelectionStart = inputStart;
 			waitingForExitConfirmation = true;
 		}
+		else if (cmd == "п" || cmd == "проверка") {
+			try {
+				int count = 0;
+				if (IsLabelInsidePictureBox(label2, pictureBox2)) {
+					count++;
+				}
+				if (IsLabelInsidePictureBox(label3, pictureBox2)) {
+					count++;
+				}
+				if (IsLabelInsidePictureBox(label4, pictureBox2)) {
+					count++;
+				}
+				if (IsLabelInsidePictureBox(label5, pictureBox1)) {
+					count++;
+				}
+				if (IsLabelInsidePictureBox(label6, pictureBox1)) {
+					count++;
+				}
+				if (IsLabelInsidePictureBox(label7, pictureBox1)) {
+					count++;
+				}
+				if (count == 6) {
+					textBox1->AppendText("\r\nПравильно!Имя хакера: 'Бобс'.Чтобы выйти в меню введите 'М'");
+					waitingForExitConfirmation = false;
+					
+						
+				}
+				else { textBox1->AppendText("\r\nНеверно, правильных ответов: " + count.ToString());
+				
+				}
+			}
+			catch (System::Exception^ ex) {
+				textBox1->AppendText("\r\nОшибка: " + ex->Message);
+			}
+		}
+		else if (cmd == "м" || cmd == "Меню") {
+			this->Hide();
+			Application::OpenForms["MyForm"]->Show();
+		}
 		else
 		{
 			textBox1->AppendText("\r\nНеизвестная команда");
 		}
 	}
 	private: System::Void Stage5_Load(System::Object^ sender, System::EventArgs^ e) {
+		pictureBox1->SendToBack(); // отправить на задний план
+		pictureBox2->SendToBack(); // отправить на задний план
+
 		srand(time(0));
-		label2->Location = System::Drawing::Point(ranx(10,600), rany(0, 850));
-		label3->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
-		label4->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
-		label5->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
-		label6->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
-		label7->Location = System::Drawing::Point(ranx(10, 600), rany(0, 805));
+		label2->Location = System::Drawing::Point(ranx(10,350), rany(0, 850));
+		label3->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
+		label4->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
+		label5->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
+		label6->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
+		label7->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
 
 	}
 
