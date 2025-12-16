@@ -123,7 +123,7 @@ namespace Xakeri {
 				static_cast<System::Byte>(204)));
 			this->label1->Location = System::Drawing::Point(958, 113);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(0, 52);
+			this->label1->Size = System::Drawing::Size(0, 51);
 			this->label1->TabIndex = 3;
 			this->label1->Click += gcnew System::EventHandler(this, &Stage3::label1_Click);
 			// 
@@ -138,6 +138,8 @@ namespace Xakeri {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"Stage3";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Кто-то сказал: Права администратора\?";

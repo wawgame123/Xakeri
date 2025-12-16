@@ -117,9 +117,11 @@ namespace Xakeri {
 			   this->Controls->Add(this->label2);
 			   this->Controls->Add(this->textBox1);
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			   this->MaximizeBox = false;
+			   this->MinimizeBox = false;
 			   this->Name = L"Stage4";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			   this->Text = L"Stage4";
+			   this->Text = L"А мне карбонара больше нравится";
 			   this->Load += gcnew System::EventHandler(this, &Stage4::Stage4_Load);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			   this->ResumeLayout(false);

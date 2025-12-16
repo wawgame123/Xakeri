@@ -69,6 +69,8 @@ namespace Xakeri {
             this->ClientSize = System::Drawing::Size(282, 253);
             this->Controls->Add(this->comboBox2);
             this->Controls->Add(this->comboBox1);
+            this->MaximizeBox = false;
+            this->MinimizeBox = false;
             this->Name = L"Settings";
             this->Text = L"Settings";
             this->Load += gcnew System::EventHandler(this, &Settings::Settings_Load);
