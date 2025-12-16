@@ -438,12 +438,12 @@ namespace Xakeri {
 		pictureBox2->SendToBack(); // отправить на задний план
 
 		srand(time(0));
-		label2->Location = System::Drawing::Point(ranx(10,350), rany(0, 850));
-		label3->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
-		label4->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
-		label5->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
-		label6->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
-		label7->Location = System::Drawing::Point(ranx(10, 350), rany(0, 805));
+		label2->Location = System::Drawing::Point(ranx(10,270), rany(0, 850));
+		label3->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label4->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label5->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label6->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label7->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
 
 	}
 
