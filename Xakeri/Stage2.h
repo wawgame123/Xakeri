@@ -174,7 +174,7 @@ namespace Xakeri {
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			   this->Name = L"Stage2";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			   this->Text = L"Stage2";
+			   this->Text = L"Рыбак рыбака...";
 			   this->Load += gcnew System::EventHandler(this, &Stage2::Stage2_Load);
 			   this->panel1->ResumeLayout(false);
 			   this->panel1->PerformLayout();
