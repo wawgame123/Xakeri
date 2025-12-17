@@ -31,6 +31,7 @@ namespace Xakeri {
 			textBox1->Text =
 				L"Терминал\r\n"
 				L"> Настройки - Н, Выход - В\r\n"
+				L"> Задача: Соотнести документ с профессией нажатием соответсвующей кнопки\r\n"
 				L"> ";
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
@@ -206,7 +207,12 @@ namespace Xakeri {
 		{
 			e->SuppressKeyPress = true;
 			String^ cmd = textBox1->Text->Substring(inputStart)->Trim();
+
+			textBox1->AppendText(L"\r\n");
+
 			ExecuteCommand(cmd);
+
+		
 			textBox1->AppendText(L"\r\n> ");
 			inputStart = textBox1->Text->Length;
 			textBox1->SelectionStart = inputStart;
@@ -337,7 +343,7 @@ namespace Xakeri {
 		{
 			if (!passwordObtained)
 			{
-				textBox1->AppendText(L"\r\nПароль не получен");
+				textBox1->AppendText(L"\nПароль не получен");
 				return;
 			}
 			Form^ f = Application::OpenForms["MyForm"];
@@ -419,70 +425,70 @@ namespace Xakeri {
 	{
 		int len = rng->Next(6, 11);
 		array<wchar_t>^ buf = gcnew array<wchar_t>(len);
-		for (int i = 0; i < len; i++)
-		{
-			int r = rng->Next(0, 26);
-			buf[i] = wchar_t('a' + r);
+		for (int i = 0; i < len; i++) {
+			buf[i] = wchar_t('a' + rng->Next(0, 26));
 		}
 		password = gcnew String(buf);
-		textBox1->AppendText(L"\r\n> Пароль получен: " + password + L"\r\n> ");
-		inputStart = textBox1->Text->Length;
-		textBox1->SelectionStart = inputStart;
+
+		
+		textBox1->AppendText(L"> Пароль получен: " + password + L"\r\n");
+		textBox1->AppendText(L"> Доступ открыт. Введите Н - Настройки, М - Меню\r\n");
 
 		passwordObtained = true;
-		for each (Control ^ c in this->Controls)
-		{
-			Button^ b = dynamic_cast<Button^>(c);
-			if (b != nullptr)
-			{
-				b->Enabled = true;
-			}
-		}
+
+
 		button1->Enabled = false;
 		button2->Enabled = false;
+
 		WritePasswordToResultsFile(password);
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (currentIndex < 0) return;
+		if (currentIndex < 0 || passwordObtained) return;
 		int owner = docOwners[indices[currentIndex]];
-		if (owner == 0)
-		{
+
+		if (owner == 0) {
 			consecutiveCorrect++;
-			textBox1->AppendText(L"\r\n> Правильно");
-			if (consecutiveCorrect >= 3 && !passwordObtained)
-			{
+			textBox1->AppendText(L"> Правильно\r\n");
+			if (consecutiveCorrect >= 3) {
 				GeneratePassword();
 			}
-			ShowNextDocument();
+			else {
+				ShowNextDocument();
+			}
 		}
-		else
-		{
+		else {
 			consecutiveCorrect = 0;
-			textBox1->AppendText(L"\r\nНеправильно");
+			textBox1->AppendText(L"> Неправильно\r\n");
 		}
+
+		
+		textBox1->AppendText(L"> ");
 		inputStart = textBox1->Text->Length;
 		textBox1->SelectionStart = inputStart;
 	}
+		  
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (currentIndex < 0) return;
+		if (currentIndex < 0 || passwordObtained) return;
 		int owner = docOwners[indices[currentIndex]];
-		if (owner == 1)
-		{
+
+		if (owner == 1) {
 			consecutiveCorrect++;
-			textBox1->AppendText(L"\r\nПравильно");
-			if (consecutiveCorrect >= 3 && !passwordObtained)
-			{
+			textBox1->AppendText(L"> Правильно\r\n");
+			if (consecutiveCorrect >= 3) {
 				GeneratePassword();
 			}
-			ShowNextDocument();
+			else {
+				ShowNextDocument();
+			}
 		}
-		else
-		{
+		else {
 			consecutiveCorrect = 0;
-			textBox1->AppendText(L"\r\nНеправильно");
+			textBox1->AppendText(L"> Неправильно\r\n");
 		}
+
+		textBox1->AppendText(L"> ");
 		inputStart = textBox1->Text->Length;
 		textBox1->SelectionStart = inputStart;
 	}

@@ -15,32 +15,27 @@ namespace Xakeri {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
 		MyForm(void)
+
 		{
-
 			InitializeComponent();
-
-			// Настройка TextBox
 			textBox1->BackColor = Color::Black;
 			textBox1->ForeColor = Color::Lime;
 			textBox1->Font = gcnew Drawing::Font("Consolas", 22);
 			textBox1->Multiline = true;
 			textBox1->ScrollBars = ScrollBars::Vertical;
-
-			// Начальный текст терминала
 			textBox1->Text =
 				"Терминал\r\n"
 				"> Настройки - Н, Выход - В\r\n"
 				"> ";
-
 			inputStart = textBox1->Text->Length;
+
 			textBox1->SelectionStart = inputStart;
-
-
 			textBox1->KeyDown += gcnew KeyEventHandler(this, &MyForm::textBox1_KeyDown);
 		}
 		
@@ -64,7 +59,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
-
+	private: AxWMPLib::AxWindowsMediaPlayer^ axWindowsMediaPlayer1;
 
 
 
@@ -72,6 +67,14 @@ namespace Xakeri {
 		int inputStart;
 
 #pragma region Windows Form Designer generated code
+	private: System::Void CheckUnlockStage6() {
+		
+		if (!button1->Enabled && !button2->Enabled && !button3->Enabled &&
+			!button4->Enabled && !button5->Enabled)
+		{
+			button6->Enabled = true; 
+		}
+	}
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
@@ -84,8 +87,10 @@ namespace Xakeri {
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->axWindowsMediaPlayer1 = (gcnew AxWMPLib::AxWindowsMediaPlayer());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->axWindowsMediaPlayer1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -230,12 +235,25 @@ namespace Xakeri {
 			this->pictureBox2->TabIndex = 8;
 			this->pictureBox2->TabStop = false;
 			// 
+			// axWindowsMediaPlayer1
+			// 
+			this->axWindowsMediaPlayer1->Enabled = true;
+			this->axWindowsMediaPlayer1->Location = System::Drawing::Point(928, 6);
+			this->axWindowsMediaPlayer1->Name = L"axWindowsMediaPlayer1";
+			this->axWindowsMediaPlayer1->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"axWindowsMediaPlayer1.OcxState")));
+			this->axWindowsMediaPlayer1->Size = System::Drawing::Size(75, 23);
+			this->axWindowsMediaPlayer1->TabIndex = 9;
+			this->axWindowsMediaPlayer1->Visible = false;
+			
+
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1902, 1033);
+			this->Controls->Add(this->axWindowsMediaPlayer1);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button6);
@@ -250,10 +268,11 @@ namespace Xakeri {
 			this->MinimizeBox = false;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
-			this->Text = L"MyForm";
+			this->Text = L"Главное меню";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->axWindowsMediaPlayer1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -283,7 +302,7 @@ namespace Xakeri {
 			textBox1->SelectionStart = inputStart;
 		}
 	}
-private: bool waitingForExitConfirmation = false; // новое поле
+private: bool waitingForExitConfirmation = false; 
 
 private: void ExecuteCommand(String^ cmd)
 {
@@ -291,14 +310,14 @@ private: void ExecuteCommand(String^ cmd)
 
 	if (waitingForExitConfirmation)
 	{
-		// Ждем ответ на подтверждение выхода
+		
 		if (cmd == "y")
 		{
 			Application::Exit();
 		}
 		else if (cmd == "n")
 		{
-			// Отмена выхода — возвращаем прошлый текст
+	
 			textBox1->Text =
 				"Терминал\r\n"
 				"> Настройки - Н, Выход - В\r\n"
@@ -311,7 +330,7 @@ private: void ExecuteCommand(String^ cmd)
 			textBox1->AppendText("\r\nНеизвестная команда");
 		}
 
-		waitingForExitConfirmation = false; // сброс состояния
+		waitingForExitConfirmation = false; 
 	}
 	else if (cmd == "н" || cmd == "настройки")
 	{
@@ -320,7 +339,6 @@ private: void ExecuteCommand(String^ cmd)
 	}
 	else if (cmd == "в" || cmd == "выход")
 	{
-		// Запрос подтверждения выхода
 		textBox1->AppendText("\r\nВы уверены? (y/n)");
 		inputStart = textBox1->Text->Length;
 		textBox1->SelectionStart = inputStart;
@@ -336,16 +354,23 @@ private: void ExecuteCommand(String^ cmd)
 		stage1Form->Show();
 		this->Hide();
 		button6->Enabled=false;
+		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		Stage1^ stage1Form = gcnew Stage1();
 		stage1Form->Show();  
 		this->Hide();
 		button1->Enabled = false;
+		CheckUnlockStage6();
 	}
 	
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		pictureBox1->SendToBack();
+		button6->Enabled = false;
+		axWindowsMediaPlayer1->URL = Application::StartupPath + "\\music\\music.mp3";
+		axWindowsMediaPlayer1->Ctlcontrols->play();
+		axWindowsMediaPlayer1->settings->volume = 50;
+		axWindowsMediaPlayer1->settings->setMode("loop", true);
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -355,24 +380,29 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	stage1Form->Show();   
 	this->Hide();
 	button2->Enabled = false;
+	CheckUnlockStage6();
+
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	Stage3^ stage1Form = gcnew Stage3();
 	stage1Form->Show();
 	this->Hide();
 	button3->Enabled = false;
+	CheckUnlockStage6();
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	Stage4^ stage1Form = gcnew Stage4();
 	stage1Form->Show();
 	this->Hide();
 	button4->Enabled = false;
+	CheckUnlockStage6();
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 	Stage5^ stage1Form = gcnew Stage5();
 	stage1Form->Show();
 	this->Hide();
 	button5->Enabled = false;
+	CheckUnlockStage6();
 }
 };
 }
