@@ -336,6 +336,8 @@ namespace Xakeri {
 	private: void ExecuteCommand(String^ cmd)
 	{
 		cmd = cmd->ToLower();
+
+		// 1. Команда: Настройки
 		if (cmd == "н" || cmd == "n")
 		{
 			Form^ setForm = Application::OpenForms["Settings"];
@@ -351,11 +353,15 @@ namespace Xakeri {
 			}
 			return;
 		}
+
+	
 		if (cmd == "в" || cmd == "d")
 		{
 			Application::Exit();
 			return;
 		}
+
+	
 		if (cmd == "м" || cmd == "m")
 		{
 			if (!loginGiven)
@@ -372,8 +378,8 @@ namespace Xakeri {
 			return;
 		}
 
-	
-		if (cmd == "п" || cmd == "g") 
+		
+		if (cmd == "п" || cmd == "g")
 		{
 			if (loginGiven)
 			{
@@ -381,6 +387,7 @@ namespace Xakeri {
 				return;
 			}
 
+	
 			bool correct = false;
 			switch (currentFileNumber)
 			{
@@ -391,16 +398,49 @@ namespace Xakeri {
 
 			if (correct)
 			{
+			
 				int len = rnd->Next(5, 8);
 				StringBuilder^ sb = gcnew StringBuilder();
 				for (int i = 0; i < len; i++) sb->Append((wchar_t)('a' + rnd->Next(0, 26)));
-
 				String^ login = sb->ToString();
+
 				textBox1->AppendText("\r\n[УСПЕХ]: Данные расшифрованы.\r\nLOGIN: " + login);
 				loginGiven = true;
-				textBox1->AppendText("\r\nВведите 'М' для перехода в систему");
 
-		
+				try
+				{
+					String^ stagesDir = Path::Combine(Application::StartupPath, "stages");
+					if (!Directory::Exists(stagesDir)) Directory::CreateDirectory(stagesDir);
+
+					String^ filePath = Path::Combine(stagesDir, "Results.txt");
+
+				
+					List<String^>^ lines = gcnew List<String^>();
+					if (File::Exists(filePath))
+					{
+						lines->AddRange(File::ReadAllLines(filePath, Encoding::UTF8));
+					}
+
+				
+					while (lines->Count < 2)
+					{
+						if (lines->Count == 0) lines->Add("Ip: ");
+						else lines->Add("Login: ");
+					}
+
+				
+					lines[1] = "Login: " + login;
+
+				
+					File::WriteAllLines(filePath, lines->ToArray(), Encoding::UTF8);
+				}
+				catch (Exception^ ex)
+				{
+					textBox1->AppendText("\r\n[ОШИБКА ФАЙЛА]: " + ex->Message);
+				}
+			
+
+				textBox1->AppendText("\r\nВведите 'М' для перехода в систему");
 			}
 			else
 			{
@@ -410,6 +450,7 @@ namespace Xakeri {
 			return;
 		}
 
+		
 		textBox1->AppendText("\r\n[СИСТЕМА]: Команда '" + cmd + "' не распознана.");
 	}
 	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e)
