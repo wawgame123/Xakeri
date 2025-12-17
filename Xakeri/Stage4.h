@@ -237,90 +237,76 @@ namespace Xakeri {
 	{
 		String^ cmdLower = cmd->ToLower();
 
-		//  ждем ответ на вопрос "Вы уверены?"
+		
 		if (waitingForExitConfirmation)
 		{
-			if (cmdLower == "y")
-			{
-				Application::Exit();
+			if (cmdLower == "y" || cmdLower == "д") { Application::Exit(); }
+			else {
+				textBox1->AppendText("\r\nОтмена выхода.");
+				waitingForExitConfirmation = false;
 			}
-			else if (cmdLower == "n")
+			return;
+		}
+
+	
+		if (cmdLower == "н" || cmdLower == "настройки")
+		{
+			if (Application::OpenForms["Settings"] != nullptr)
+				Application::OpenForms["Settings"]->Show();
+			return;
+		}
+
+		if (cmdLower == "в" || cmdLower == "выход")
+		{
+			textBox1->AppendText("\r\nВы уверены, что хотите выйти? (y/n)");
+			waitingForExitConfirmation = true;
+			return;
+		}
+
+
+		if (cmdLower == "м" || cmdLower == "меню")
+		{
+			if (isTaskActive)
 			{
-				textBox1->Text = "\r\n>";
-				inputStart = textBox1->Text->Length;
-				textBox1->SelectionStart = inputStart;
+				textBox1->AppendText("\r\n[ОШИБКА] Доступ запрещен. Сначала расшифруйте сообщение.");
 			}
 			else
 			{
-				textBox1->AppendText("\r\nВведите 'y' (да) или 'n' (нет)");
+				this->Hide();
+				Form^ f = Application::OpenForms["MyForm"];
+				if (f != nullptr) f->Show();
 			}
-			// После любого ответа выключаем режим ожидания
-			waitingForExitConfirmation = false;
-			return; // выходим из функции, чтобы не проверять остальные команды
+			return;
 		}
 
-		//  Если мы не ждем подтверждения, проверяем остальные команды
+		
 		if (isTaskActive)
 		{
-			// Логика проверки задания
+			
 			String^ cleanInput = "";
 			for (int i = 0; i < cmd->Length; i++) {
-				if (Char::IsLetter(cmd[i])) {
-					cleanInput += Char::ToUpper(cmd[i]);
-				}
+				if (Char::IsLetter(cmd[i])) cleanInput += Char::ToUpper(cmd[i]);
 			}
 
-			String^ cleanCorrect = correctDecryptedMessage;
-			if (cleanInput == cleanCorrect)
+			if (cleanInput == correctDecryptedMessage)
 			{
 				isTaskActive = false;
 				serverKey = generateServerKey();
-				// записываем serverKey в файл
 				WriteServerKeyToResultsFile(serverKey);
 
-				this->label1->Text = "[УСПЕХ] Задание выполнено! Ключ получен.";
-				textBox1->AppendText("\r\n[Успех!] Сообщение расшифровано верно!");
-				textBox1->AppendText("\r\nВаш серверный ключ (SERVERKEY): " + serverKey);
-				textBox1->AppendText("\r\nКлюч получен. Нажмите 'В' для выхода, 'Н' для настроек или 'М' для меню");
+				this->label1->Text = "[УСПЕХ] Задание выполнено!";
+				textBox1->AppendText("\r\n[СИСТЕМА] Расшифровка завершена успешно.");
+				textBox1->AppendText("\r\nSERVERKEY: " + serverKey);
+				textBox1->AppendText("\r\nТеперь вы можете перейти в Меню (М)");
 			}
 			else
 			{
-				textBox1->AppendText("\r\n[Ошибка] Неверное расшифрованное сообщение. Попробуйте снова.");
+				textBox1->AppendText("\r\n[ОШИБКА] Неверный код расшифровки. Попробуйте еще раз.");
 			}
+			return;
 		}
-		else if (cmdLower == "н" || cmdLower == "настройки")
-		{
-			Settings^ settingsForm = gcnew Settings();
-			settingsForm->Show();
-		}
-		else if (cmdLower == "м" || cmdLower == "меню")
-		{
-			this->Hide();
-			Form^ f = Application::OpenForms["MyForm"];
-			if (f != nullptr) {
-				f->Show();
-			}
-			else {
-				textBox1->AppendText("\r\nMyForm не найден");
-				this->Show();
-			}
-		}
-		else if (cmdLower == "в" || cmdLower == "выход")
-		{
-			// задаем вопрос и включаем режим ожидания
-			textBox1->AppendText("\r\nВы уверены? (y/n)");
-			inputStart = textBox1->Text->Length;
-			textBox1->SelectionStart = inputStart;
-			waitingForExitConfirmation = true;
-		}
-		else if (!isTaskActive && serverKey != "" && cmdLower == "")
-		{
-			textBox1->AppendText("\r\nКлюч уже получен. Вы можете выйти, нажав 'В'.");
-		}
-		else
-		{
-			textBox1->AppendText("\r\nНеизвестная команда");
-		}
+
+		textBox1->AppendText("\r\nНеизвестная команда.");
 	}
 	private: System::Void Stage4_Load(System::Object^ sender, System::EventArgs^ e) {
 		pictureBox3->SendToBack();

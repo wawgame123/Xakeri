@@ -119,6 +119,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="loading.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Stage1.cpp" />
@@ -129,6 +130,9 @@
     <ClCompile Include="Stage6.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="loading.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -155,6 +159,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="loading.resx">
+      <DependentUpon>loading.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>

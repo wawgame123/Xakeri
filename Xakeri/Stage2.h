@@ -336,12 +336,31 @@ namespace Xakeri {
 	private: void ExecuteCommand(String^ cmd)
 	{
 		cmd = cmd->ToLower();
-
+		if (cmd == "н" || cmd == "n")
+		{
+			Form^ setForm = Application::OpenForms["Settings"];
+			if (setForm != nullptr)
+			{
+				setForm->Show();
+				setForm->BringToFront();
+			}
+			else
+			{
+				Xakeri::Settings^ newSettings = gcnew Xakeri::Settings();
+				newSettings->Show();
+			}
+			return;
+		}
+		if (cmd == "в" || cmd == "d")
+		{
+			Application::Exit();
+			return;
+		}
 		if (cmd == "м" || cmd == "m")
 		{
 			if (!loginGiven)
 			{
-				textBox1->AppendText("\r\nСначала получите логин");
+				textBox1->AppendText("\r\n[СИСТЕМА]: ОШИБКА. Сначала получите данные (П)");
 				return;
 			}
 
@@ -349,96 +368,50 @@ namespace Xakeri {
 			{
 				Application::OpenForms["MyForm"]->Show();
 			}
-			else
-			{
-			}
 			this->Hide();
 			return;
 		}
 
-		if (cmd == "п" || cmd == "проверка")
+	
+		if (cmd == "п" || cmd == "g") 
 		{
 			if (loginGiven)
 			{
-				textBox1->AppendText("\r\nЛогин уже выдан. введите м чтобы попасть в меню");
+				textBox1->AppendText("\r\n[СИСТЕМА]: Данные уже получены. Используйте 'М'");
 				return;
 			}
 
 			bool correct = false;
 			switch (currentFileNumber)
 			{
-			case 1:
-				correct = (checkBox1->Checked && checkBox2->Checked);
-				break;
-			case 2:
-			case 3:
-				correct = (checkBox1->Checked && !checkBox2->Checked);
-				break;
-			case 4:
-			case 5:
-				correct = (!checkBox1->Checked && checkBox2->Checked);
-				break;
-			default:
-				correct = false;
-				break;
+			case 1: correct = (checkBox1->Checked && checkBox2->Checked); break;
+			case 2: case 3: correct = (checkBox1->Checked && !checkBox2->Checked); break;
+			case 4: case 5: correct = (!checkBox1->Checked && checkBox2->Checked); break;
 			}
 
 			if (correct)
 			{
 				int len = rnd->Next(5, 8);
 				StringBuilder^ sb = gcnew StringBuilder();
-				for (int i = 0; i < len; i++)
-				{
-					wchar_t ch = (wchar_t)('a' + rnd->Next(0, 26));
-					sb->Append(ch);
-				}
+				for (int i = 0; i < len; i++) sb->Append((wchar_t)('a' + rnd->Next(0, 26)));
+
 				String^ login = sb->ToString();
-
-				textBox1->AppendText("\r\nПравильно\r\nlogin: " + login);
+				textBox1->AppendText("\r\n[УСПЕХ]: Данные расшифрованы.\r\nLOGIN: " + login);
 				loginGiven = true;
-				textBox1->AppendText("\r\nвведите м чтобы попасть в меню");
+				textBox1->AppendText("\r\nВведите 'М' для перехода в систему");
 
-				try
-				{
-					String^ stagesDir = Path::Combine(Application::StartupPath, "stages");
-					Directory::CreateDirectory(stagesDir);
-					String^ filePath = Path::Combine(stagesDir, "Results.txt");
-
-					List<String^>^ lines = gcnew List<String^>();
-					if (File::Exists(filePath))
-					{
-						lines->AddRange(File::ReadAllLines(filePath, Encoding::UTF8));
-					}
-
-					if (lines->Count < 2)
-					{
-						if (lines->Count == 0) lines->Add("Ip: ");
-						lines->Add("Login: " + login);
-					}
-					else
-					{
-						lines[1] = "Login: " + login;
-					}
-
-					File::WriteAllLines(filePath, lines->ToArray(), Encoding::UTF8);
-				}
-				catch (Exception^ ex)
-				{
-					textBox1->AppendText("\r\nОшибка записи логина: " + ex->Message);
-				}
+		
 			}
 			else
 			{
-				textBox1->AppendText("\r\nОШИБКА ПРОВЕРКИ. ЗАГРУЖАЮ НОВЫЙ ФАЙЛ.");
+				textBox1->AppendText("\r\n[ОШИБКА]: Признаки неверны. Генерация нового файла...");
 				LoadRandomFile();
 			}
 			return;
 		}
 
-		
-		textBox1->AppendText("\r\nНеизвестная команда");
+		textBox1->AppendText("\r\n[СИСТЕМА]: Команда '" + cmd + "' не распознана.");
 	}
-
 	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e)
 	{
 		pictureBox1->SendToBack();

@@ -106,9 +106,9 @@ namespace Xakeri {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(0, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 16);
+			this->label1->Size = System::Drawing::Size(0, 16);
 			this->label1->TabIndex = 1;
-			this->label1->Text = L"label1";
+			this->label1->Click += gcnew System::EventHandler(this, &Stage5::label1_Click);
 			// 
 			// label2
 			// 
@@ -122,7 +122,7 @@ namespace Xakeri {
 			this->label2->ImageAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->label2->Location = System::Drawing::Point(43, 496);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(423, 51);
+			this->label2->Size = System::Drawing::Size(532, 63);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Защита от фишинга";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -141,7 +141,7 @@ namespace Xakeri {
 			this->label3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label3.Image")));
 			this->label3->Location = System::Drawing::Point(136, 885);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(482, 51);
+			this->label3->Size = System::Drawing::Size(600, 63);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Привязка к устройству";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -160,7 +160,7 @@ namespace Xakeri {
 			this->label4->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->label4->Location = System::Drawing::Point(3, 709);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(468, 51);
+			this->label4->Size = System::Drawing::Size(584, 63);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Минимизация ущерба";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -179,7 +179,7 @@ namespace Xakeri {
 			this->label5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->label5->Location = System::Drawing::Point(226, 120);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(351, 102);
+			this->label5->Size = System::Drawing::Size(439, 126);
 			this->label5->TabIndex = 5;
 			this->label5->Text = L"Зависимость от \r\nустройства";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -199,7 +199,7 @@ namespace Xakeri {
 			this->label6->ImageAlign = System::Drawing::ContentAlignment::TopRight;
 			this->label6->Location = System::Drawing::Point(112, 319);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(356, 102);
+			this->label6->Size = System::Drawing::Size(444, 126);
 			this->label6->TabIndex = 6;
 			this->label6->Text = L"Неудобство при \r\nчастых входах";
 			this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -218,7 +218,7 @@ namespace Xakeri {
 			this->label7->ImageAlign = System::Drawing::ContentAlignment::TopLeft;
 			this->label7->Location = System::Drawing::Point(136, 40);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(367, 51);
+			this->label7->Size = System::Drawing::Size(456, 63);
 			this->label7->TabIndex = 7;
 			this->label7->Text = L"Риск блокировки";
 			this->label7->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Stage5::label7_MouseDown);
@@ -395,8 +395,7 @@ namespace Xakeri {
 		}
 		else if (cmd == "н" || cmd == "настройки")
 		{
-			Settings^ settingsForm = gcnew Settings();
-			settingsForm->Show();
+			Application::OpenForms["Settings"]->Show();
 		}
 		else if (cmd == "в" || cmd == "выход")
 		{
@@ -529,6 +528,8 @@ private: System::Void label7_MouseMove(System::Object^ sender, System::Windows::
 	}
 }
 private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

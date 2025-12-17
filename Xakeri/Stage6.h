@@ -404,8 +404,7 @@ namespace Xakeri {
 		}
 		else if (cmd == "н" || cmd == "настройки")
 		{
-			Settings^ settingsForm = gcnew Settings();
-			settingsForm->Show();
+			Application::OpenForms["Settings"]->Show();
 		}
 		else if (cmd == "в" || cmd == "выход")
 		{

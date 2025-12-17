@@ -324,8 +324,7 @@ namespace Xakeri {
 				textBox1->AppendText(L"\r\nДоступ к настройкам закрыт до получения пароля");
 				return;
 			}
-			Settings^ settingsForm = gcnew Settings();
-			settingsForm->Show();
+			Application::OpenForms["Settings"]->Show();
 		}
 		else if (cmd == L"в" || cmd == L"выход")
 		{
