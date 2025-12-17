@@ -203,7 +203,7 @@ namespace Xakeri {
 		}
 	}
 
-	private: System::Void textBox1_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+	private: System::Void textBox1_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)	
 	{
 		EnsureCaretNotBeforeInput();
 	}
