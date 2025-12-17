@@ -32,12 +32,15 @@ namespace Xakeri {
         }
     private: System::Windows::Forms::TextBox^ textBox1;
     private: System::Windows::Forms::PictureBox^ pictureBox2;
-    private: System::Windows::Forms::PictureBox^ pictureBox1;
+
     private: AxWMPLib::AxWindowsMediaPlayer^ axWindowsMediaPlayer1;
     private: System::Windows::Forms::ComboBox^ comboBox1;
     private: System::Windows::Forms::CheckBox^ checkBox1;
     private: System::Windows::Forms::Label^ label1;
     private: System::Windows::Forms::Label^ label2;
+    private: System::Windows::Forms::PictureBox^ pictureBox1;
+    private: System::Windows::Forms::Label^ label3;
+
     protected:
 
     protected:
@@ -54,12 +57,13 @@ namespace Xakeri {
             System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Settings::typeid));
             this->textBox1 = (gcnew System::Windows::Forms::TextBox());
             this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-            this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-            this->axWindowsMediaPlayer1 = (gcnew AxWMPLib::AxWindowsMediaPlayer());
             this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
             this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->label2 = (gcnew System::Windows::Forms::Label());
+            this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+            this->axWindowsMediaPlayer1 = (gcnew AxWMPLib::AxWindowsMediaPlayer());
+            this->label3 = (gcnew System::Windows::Forms::Label());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->axWindowsMediaPlayer1))->BeginInit();
@@ -71,12 +75,12 @@ namespace Xakeri {
             this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
             this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->textBox1->Location = System::Drawing::Point(-1, 0);
+            this->textBox1->Location = System::Drawing::Point(1, 0);
             this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
             this->textBox1->Multiline = true;
             this->textBox1->Name = L"textBox1";
             this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-            this->textBox1->Size = System::Drawing::Size(889, 1205);
+            this->textBox1->Size = System::Drawing::Size(666, 600);
             this->textBox1->TabIndex = 1;
             this->textBox1->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Settings::textBox1_KeyDown);
             // 
@@ -84,47 +88,28 @@ namespace Xakeri {
             // 
             this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
             this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->pictureBox2->Location = System::Drawing::Point(749, 0);
+            this->pictureBox2->Location = System::Drawing::Point(525, 0);
             this->pictureBox2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
             this->pictureBox2->Name = L"pictureBox2";
             this->pictureBox2->Size = System::Drawing::Size(117, 38);
             this->pictureBox2->TabIndex = 10;
             this->pictureBox2->TabStop = false;
             // 
-            // pictureBox1
-            // 
-            this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
-            this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->pictureBox1->Location = System::Drawing::Point(894, 0);
-            this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-            this->pictureBox1->Name = L"pictureBox1";
-            this->pictureBox1->Size = System::Drawing::Size(1009, 1031);
-            this->pictureBox1->TabIndex = 11;
-            this->pictureBox1->TabStop = false;
-            // 
-            // axWindowsMediaPlayer1
-            // 
-            this->axWindowsMediaPlayer1->Enabled = true;
-            this->axWindowsMediaPlayer1->Location = System::Drawing::Point(902, 8);
-            this->axWindowsMediaPlayer1->Name = L"axWindowsMediaPlayer1";
-            this->axWindowsMediaPlayer1->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"axWindowsMediaPlayer1.OcxState")));
-            this->axWindowsMediaPlayer1->Size = System::Drawing::Size(75, 23);
-            this->axWindowsMediaPlayer1->TabIndex = 12;
-            this->axWindowsMediaPlayer1->Visible = false;
-            // 
             // comboBox1
             // 
+            this->comboBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(128)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+                static_cast<System::Int32>(static_cast<System::Byte>(255)));
             this->comboBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->comboBox1->ForeColor = System::Drawing::Color::Black;
+            this->comboBox1->ForeColor = System::Drawing::Color::Transparent;
             this->comboBox1->FormattingEnabled = true;
             this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(19) {
                 L"5%", L"10%", L"15%", L"20%", L"25%", L"30%",
                     L"35%", L"40%", L"45%", L"50%", L"55%", L"65%", L"70%", L"75%", L"80%", L"85%", L"90%", L"95%", L"100%"
             });
-            this->comboBox1->Location = System::Drawing::Point(1239, 217);
+            this->comboBox1->Location = System::Drawing::Point(1019, 217);
             this->comboBox1->Name = L"comboBox1";
-            this->comboBox1->Size = System::Drawing::Size(185, 50);
+            this->comboBox1->Size = System::Drawing::Size(185, 44);
             this->comboBox1->TabIndex = 13;
             this->comboBox1->Text = L"10%";
             this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Settings::comboBox1_SelectedIndexChanged);
@@ -132,19 +117,19 @@ namespace Xakeri {
             // checkBox1
             // 
             this->checkBox1->AutoSize = true;
-            this->checkBox1->BackColor = System::Drawing::Color::Transparent;
+            this->checkBox1->BackColor = System::Drawing::Color::White;
             this->checkBox1->Checked = true;
             this->checkBox1->CheckState = System::Windows::Forms::CheckState::Checked;
             this->checkBox1->FlatStyle = System::Windows::Forms::FlatStyle::System;
             this->checkBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->checkBox1->ForeColor = System::Drawing::Color::White;
-            this->checkBox1->Location = System::Drawing::Point(1239, 295);
+            this->checkBox1->ForeColor = System::Drawing::SystemColors::Control;
+            this->checkBox1->Location = System::Drawing::Point(1052, 274);
             this->checkBox1->Name = L"checkBox1";
-            this->checkBox1->Size = System::Drawing::Size(185, 47);
+            this->checkBox1->Size = System::Drawing::Size(152, 41);
             this->checkBox1->TabIndex = 14;
             this->checkBox1->TabStop = false;
-            this->checkBox1->Text = L"Музыка";
+            this->checkBox1->Text = L"||||||||||||||";
             this->checkBox1->UseVisualStyleBackColor = false;
             this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Settings::checkBox1_CheckedChanged);
             // 
@@ -154,10 +139,10 @@ namespace Xakeri {
             this->label1->BackColor = System::Drawing::Color::Transparent;
             this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->label1->ForeColor = System::Drawing::Color::Black;
-            this->label1->Location = System::Drawing::Point(914, 217);
+            this->label1->ForeColor = System::Drawing::Color::White;
+            this->label1->Location = System::Drawing::Point(795, 220);
             this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(202, 42);
+            this->label1->Size = System::Drawing::Size(174, 36);
             this->label1->TabIndex = 15;
             this->label1->Text = L"Громкость";
             // 
@@ -167,16 +152,54 @@ namespace Xakeri {
             this->label2->BackColor = System::Drawing::Color::Transparent;
             this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->label2->ForeColor = System::Drawing::Color::Black;
-            this->label2->Location = System::Drawing::Point(1159, 33);
+            this->label2->ForeColor = System::Drawing::Color::White;
+            this->label2->Location = System::Drawing::Point(945, 137);
             this->label2->Name = L"label2";
-            this->label2->Size = System::Drawing::Size(99, 42);
+            this->label2->Size = System::Drawing::Size(82, 36);
             this->label2->TabIndex = 16;
             this->label2->Text = L"Звук";
             // 
+            // pictureBox1
+            // 
+            this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
+            this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+            this->pictureBox1->Location = System::Drawing::Point(662, -10);
+            this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+            this->pictureBox1->Name = L"pictureBox1";
+            this->pictureBox1->Size = System::Drawing::Size(623, 610);
+            this->pictureBox1->TabIndex = 11;
+            this->pictureBox1->TabStop = false;
+            // 
+            // axWindowsMediaPlayer1
+            // 
+            this->axWindowsMediaPlayer1->Enabled = true;
+            this->axWindowsMediaPlayer1->Location = System::Drawing::Point(682, 8);
+            this->axWindowsMediaPlayer1->Name = L"axWindowsMediaPlayer1";
+            this->axWindowsMediaPlayer1->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"axWindowsMediaPlayer1.OcxState")));
+            this->axWindowsMediaPlayer1->Size = System::Drawing::Size(75, 23);
+            this->axWindowsMediaPlayer1->TabIndex = 12;
+            this->axWindowsMediaPlayer1->Visible = false;
+            // 
+            // label3
+            // 
+            this->label3->AutoSize = true;
+            this->label3->BackColor = System::Drawing::Color::Transparent;
+            this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
+            this->label3->ForeColor = System::Drawing::Color::White;
+            this->label3->Location = System::Drawing::Point(1066, 277);
+            this->label3->Name = L"label3";
+            this->label3->Size = System::Drawing::Size(125, 36);
+            this->label3->TabIndex = 17;
+            this->label3->Text = L"Музыка";
+            this->label3->Click += gcnew System::EventHandler(this, &Settings::label3_Click);
+            // 
             // Settings
             // 
-            this->ClientSize = System::Drawing::Size(1901, 1033);
+            this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+            this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+            this->ClientSize = System::Drawing::Size(1284, 601);
+            this->Controls->Add(this->label3);
             this->Controls->Add(this->label2);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->checkBox1);
@@ -185,6 +208,8 @@ namespace Xakeri {
             this->Controls->Add(this->pictureBox1);
             this->Controls->Add(this->pictureBox2);
             this->Controls->Add(this->textBox1);
+            this->DoubleBuffered = true;
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
             this->MaximizeBox = false;
             this->MinimizeBox = false;
             this->Name = L"Settings";
@@ -237,5 +262,7 @@ namespace Xakeri {
             if (this->checkBox1->Checked) axWindowsMediaPlayer1->Ctlcontrols->play();
             else axWindowsMediaPlayer1->Ctlcontrols->pause();
         }
-    };
+    private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+    }
+};
 }
