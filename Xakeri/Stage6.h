@@ -401,6 +401,9 @@ namespace Xakeri {
 					"\r\n" +
 					"> Выход - В\r\n";
 			}
+			else {
+				textBox1->AppendText("\r\n> Неверные данные!");
+			}
 		}
 		else if (cmd == "н" || cmd == "настройки")
 		{

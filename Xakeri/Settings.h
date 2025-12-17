@@ -75,12 +75,12 @@ namespace Xakeri {
             this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
             this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->textBox1->Location = System::Drawing::Point(1, -10);
+            this->textBox1->Location = System::Drawing::Point(1, 0);
             this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
             this->textBox1->Multiline = true;
             this->textBox1->Name = L"textBox1";
             this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-            this->textBox1->Size = System::Drawing::Size(666, 610);
+            this->textBox1->Size = System::Drawing::Size(666, 600);
             this->textBox1->TabIndex = 1;
             this->textBox1->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Settings::textBox1_KeyDown);
             // 
@@ -163,10 +163,10 @@ namespace Xakeri {
             // 
             this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
             this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->pictureBox1->Location = System::Drawing::Point(655, -10);
+            this->pictureBox1->Location = System::Drawing::Point(662, -10);
             this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
             this->pictureBox1->Name = L"pictureBox1";
-            this->pictureBox1->Size = System::Drawing::Size(617, 600);
+            this->pictureBox1->Size = System::Drawing::Size(623, 610);
             this->pictureBox1->TabIndex = 11;
             this->pictureBox1->TabStop = false;
             // 
