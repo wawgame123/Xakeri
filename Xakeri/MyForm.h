@@ -219,7 +219,7 @@ namespace Xakeri {
 			// 
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox1->Location = System::Drawing::Point(920, -2);
+			this->pictureBox1->Location = System::Drawing::Point(928, 1);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(970, 1031);
 			this->pictureBox1->TabIndex = 7;
@@ -244,8 +244,6 @@ namespace Xakeri {
 			this->axWindowsMediaPlayer1->Size = System::Drawing::Size(75, 23);
 			this->axWindowsMediaPlayer1->TabIndex = 9;
 			this->axWindowsMediaPlayer1->Visible = false;
-			
-
 			// 
 			// MyForm
 			// 
