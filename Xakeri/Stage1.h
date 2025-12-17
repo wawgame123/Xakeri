@@ -109,11 +109,12 @@ namespace Xakeri {
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBox1->Location = System::Drawing::Point(-10, 2);
+			this->textBox1->Location = System::Drawing::Point(-8, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->textBox1->Size = System::Drawing::Size(889, 1205);
+			this->textBox1->Size = System::Drawing::Size(667, 979);
 			this->textBox1->TabIndex = 0;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Stage1::textBox1_TextChanged);
 			// 
@@ -126,9 +127,10 @@ namespace Xakeri {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->button1->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->button1->Location = System::Drawing::Point(1133, 189);
+			this->button1->Location = System::Drawing::Point(850, 154);
+			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(514, 109);
+			this->button1->Size = System::Drawing::Size(386, 89);
 			this->button1->TabIndex = 1;
 			this->button1->UseVisualStyleBackColor = false;
 			// 
@@ -141,9 +143,10 @@ namespace Xakeri {
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->button2->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->button2->Location = System::Drawing::Point(1133, 313);
+			this->button2->Location = System::Drawing::Point(850, 254);
+			this->button2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(514, 109);
+			this->button2->Size = System::Drawing::Size(386, 89);
 			this->button2->TabIndex = 2;
 			this->button2->UseVisualStyleBackColor = false;
 			// 
@@ -156,9 +159,10 @@ namespace Xakeri {
 			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->button3->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->button3->Location = System::Drawing::Point(1133, 439);
+			this->button3->Location = System::Drawing::Point(850, 357);
+			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(514, 109);
+			this->button3->Size = System::Drawing::Size(386, 89);
 			this->button3->TabIndex = 3;
 			this->button3->UseVisualStyleBackColor = false;
 			// 
@@ -171,9 +175,10 @@ namespace Xakeri {
 			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->button4->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->button4->Location = System::Drawing::Point(1133, 566);
+			this->button4->Location = System::Drawing::Point(850, 460);
+			this->button4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(514, 109);
+			this->button4->Size = System::Drawing::Size(386, 89);
 			this->button4->TabIndex = 4;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
@@ -186,18 +191,20 @@ namespace Xakeri {
 				static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Transparent;
 			this->label1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label1.Image")));
-			this->label1->Location = System::Drawing::Point(1018, 26);
+			this->label1->Location = System::Drawing::Point(764, 21);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(0, 54);
+			this->label1->Size = System::Drawing::Size(0, 44);
 			this->label1->TabIndex = 6;
 			// 
 			// pictureBox2
 			// 
 			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
 			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox2->Location = System::Drawing::Point(735, 2);
+			this->pictureBox2->Location = System::Drawing::Point(551, 2);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			this->pictureBox2->Size = System::Drawing::Size(88, 31);
 			this->pictureBox2->TabIndex = 9;
 			this->pictureBox2->TabStop = false;
 			// 
@@ -205,18 +212,19 @@ namespace Xakeri {
 			// 
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox1->Location = System::Drawing::Point(874, 2);
+			this->pictureBox1->Location = System::Drawing::Point(656, 2);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(1009, 1031);
+			this->pictureBox1->Size = System::Drawing::Size(757, 838);
 			this->pictureBox1->TabIndex = 10;
 			this->pictureBox1->TabStop = false;
 			// 
 			// Stage1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->ClientSize = System::Drawing::Size(1876, 1035);
+			this->ClientSize = System::Drawing::Size(1407, 841);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->label1);
@@ -226,6 +234,7 @@ namespace Xakeri {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"Stage1";
