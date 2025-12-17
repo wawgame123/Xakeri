@@ -74,6 +74,8 @@ namespace Xakeri {
 		Random^ rnd;
 	private: System::Windows::Forms::Label^ label1;
 		   String^ currentEmail;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
 
 		 
 		   bool loginGiven;
@@ -81,13 +83,18 @@ namespace Xakeri {
 #pragma region Windows Form Designer generated code
 		   void InitializeComponent(void)
 		   {
+			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stage2::typeid));
 			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			   this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			   this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
 			   this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			   this->label1 = (gcnew System::Windows::Forms::Label());
+			   this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			   this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			   this->panel1->SuspendLayout();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			   this->SuspendLayout();
 			   // 
 			   // textBox1
@@ -96,7 +103,7 @@ namespace Xakeri {
 			   this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			   this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
-			   this->textBox1->Location = System::Drawing::Point(-5, 1);
+			   this->textBox1->Location = System::Drawing::Point(-11, -4);
 			   this->textBox1->Multiline = true;
 			   this->textBox1->Name = L"textBox1";
 			   this->textBox1->Size = System::Drawing::Size(945, 1031);
@@ -108,7 +115,8 @@ namespace Xakeri {
 			   this->checkBox1->AutoSize = true;
 			   this->checkBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
-			   this->checkBox1->Location = System::Drawing::Point(3, 3);
+			   this->checkBox1->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			   this->checkBox1->Location = System::Drawing::Point(17, 26);
 			   this->checkBox1->Name = L"checkBox1";
 			   this->checkBox1->Size = System::Drawing::Size(390, 42);
 			   this->checkBox1->TabIndex = 3;
@@ -121,7 +129,8 @@ namespace Xakeri {
 			   this->checkBox2->AutoSize = true;
 			   this->checkBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
-			   this->checkBox2->Location = System::Drawing::Point(3, 68);
+			   this->checkBox2->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			   this->checkBox2->Location = System::Drawing::Point(17, 74);
 			   this->checkBox2->Name = L"checkBox2";
 			   this->checkBox2->Size = System::Drawing::Size(488, 42);
 			   this->checkBox2->TabIndex = 4;
@@ -132,18 +141,22 @@ namespace Xakeri {
 			   // panel1
 			   // 
 			   this->panel1->BackColor = System::Drawing::Color::Transparent;
+			   this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
+			   this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->panel1->Controls->Add(this->checkBox1);
 			   this->panel1->Controls->Add(this->checkBox2);
-			   this->panel1->Location = System::Drawing::Point(958, 395);
+			   this->panel1->Location = System::Drawing::Point(1115, 395);
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(533, 150);
 			   this->panel1->TabIndex = 5;
 			   // 
 			   // textBox2
 			   // 
+			   this->textBox2->BackColor = System::Drawing::Color::RoyalBlue;
 			   this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
-			   this->textBox2->Location = System::Drawing::Point(949, 51);
+			   this->textBox2->ForeColor = System::Drawing::Color::White;
+			   this->textBox2->Location = System::Drawing::Point(1099, 62);
 			   this->textBox2->Multiline = true;
 			   this->textBox2->Name = L"textBox2";
 			   this->textBox2->ReadOnly = true;
@@ -154,13 +167,36 @@ namespace Xakeri {
 			   // label1
 			   // 
 			   this->label1->AutoSize = true;
-			   this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   this->label1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
-			   this->label1->Location = System::Drawing::Point(1068, 1);
+			   this->label1->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			   this->label1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label1.Image")));
+			   this->label1->Location = System::Drawing::Point(1125, 9);
 			   this->label1->Name = L"label1";
-			   this->label1->Size = System::Drawing::Size(351, 29);
+			   this->label1->Size = System::Drawing::Size(467, 38);
 			   this->label1->TabIndex = 7;
 			   this->label1->Text = L"Выберите признаки фишинга";
+			   // 
+			   // pictureBox2
+			   // 
+			   this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			   this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->pictureBox2->Location = System::Drawing::Point(788, 5);
+			   this->pictureBox2->Name = L"pictureBox2";
+			   this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			   this->pictureBox2->TabIndex = 9;
+			   this->pictureBox2->TabStop = false;
+			   // 
+			   // pictureBox1
+			   // 
+			   this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
+			   this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->pictureBox1->Location = System::Drawing::Point(930, -4);
+			   this->pictureBox1->Name = L"pictureBox1";
+			   this->pictureBox1->Size = System::Drawing::Size(970, 1031);
+			   this->pictureBox1->TabIndex = 10;
+			   this->pictureBox1->TabStop = false;
 			   // 
 			   // Stage2
 			   // 
@@ -168,17 +204,23 @@ namespace Xakeri {
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			   this->ClientSize = System::Drawing::Size(1902, 1033);
+			   this->Controls->Add(this->pictureBox1);
+			   this->Controls->Add(this->pictureBox2);
 			   this->Controls->Add(this->label1);
 			   this->Controls->Add(this->textBox2);
 			   this->Controls->Add(this->panel1);
 			   this->Controls->Add(this->textBox1);
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			   this->MaximizeBox = false;
+			   this->MinimizeBox = false;
 			   this->Name = L"Stage2";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"Рыбак рыбака...";
 			   this->Load += gcnew System::EventHandler(this, &Stage2::Stage2_Load);
 			   this->panel1->ResumeLayout(false);
 			   this->panel1->PerformLayout();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			   this->ResumeLayout(false);
 			   this->PerformLayout();
 
@@ -399,7 +441,7 @@ namespace Xakeri {
 
 	private: System::Void Stage2_Load(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		pictureBox1->SendToBack();
 		try
 		{
 			String^ stagesDir = Path::Combine(Application::StartupPath, "stages");

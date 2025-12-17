@@ -83,17 +83,24 @@ namespace Xakeri {
 		String^ ip;
 		int mediumSelectedCount;
 		int state;
-		const int MAX_TERMINAL_LINES = 200;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+		   const int MAX_TERMINAL_LINES = 200;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stage1::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -102,7 +109,7 @@ namespace Xakeri {
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBox1->Location = System::Drawing::Point(-5, 1);
+			this->textBox1->Location = System::Drawing::Point(-10, 2);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
@@ -113,44 +120,60 @@ namespace Xakeri {
 			// button1
 			// 
 			this->button1->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.BackgroundImage")));
+			this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button1->Location = System::Drawing::Point(1000, 201);
+			this->button1->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->button1->Location = System::Drawing::Point(1133, 189);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(461, 75);
+			this->button1->Size = System::Drawing::Size(514, 109);
 			this->button1->TabIndex = 1;
 			this->button1->UseVisualStyleBackColor = false;
 			// 
 			// button2
 			// 
 			this->button2->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.BackgroundImage")));
+			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button2->Location = System::Drawing::Point(1000, 301);
+			this->button2->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->button2->Location = System::Drawing::Point(1133, 313);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(461, 75);
+			this->button2->Size = System::Drawing::Size(514, 109);
 			this->button2->TabIndex = 2;
 			this->button2->UseVisualStyleBackColor = false;
 			// 
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.BackgroundImage")));
+			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button3->Location = System::Drawing::Point(1000, 400);
+			this->button3->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->button3->Location = System::Drawing::Point(1133, 439);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(461, 75);
+			this->button3->Size = System::Drawing::Size(514, 109);
 			this->button3->TabIndex = 3;
 			this->button3->UseVisualStyleBackColor = false;
 			// 
 			// button4
 			// 
 			this->button4->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button4->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.BackgroundImage")));
+			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 31.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button4->Location = System::Drawing::Point(1000, 500);
+			this->button4->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->button4->Location = System::Drawing::Point(1133, 566);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(461, 75);
+			this->button4->Size = System::Drawing::Size(514, 109);
 			this->button4->TabIndex = 4;
 			this->button4->UseVisualStyleBackColor = false;
 			// 
@@ -158,19 +181,44 @@ namespace Xakeri {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 28.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(910, 23);
+			this->label1->ForeColor = System::Drawing::Color::Transparent;
+			this->label1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label1.Image")));
+			this->label1->Location = System::Drawing::Point(1018, 26);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(0, 42);
+			this->label1->Size = System::Drawing::Size(0, 54);
 			this->label1->TabIndex = 6;
+			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox2->Location = System::Drawing::Point(735, 2);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			this->pictureBox2->TabIndex = 9;
+			this->pictureBox2->TabStop = false;
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
+			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox1->Location = System::Drawing::Point(874, 2);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(1009, 1031);
+			this->pictureBox1->TabIndex = 10;
+			this->pictureBox1->TabStop = false;
 			// 
 			// Stage1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->ClientSize = System::Drawing::Size(1924, 1033);
+			this->ClientSize = System::Drawing::Size(1876, 1035);
+			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -178,10 +226,14 @@ namespace Xakeri {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"Stage1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::WindowsDefaultBounds;
 			this->Text = L"Вы самый слабый пароль, прощайте!";
 			this->Load += gcnew System::EventHandler(this, &Stage1::Stage1_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -493,7 +545,7 @@ namespace Xakeri {
 	}
 private: System::Void Stage1_Load(System::Object^ sender, System::EventArgs^ e)
 {
-
+	pictureBox1->SendToBack();
 	try
 	{
 		String^ stagesDir = Path::Combine(Application::StartupPath, "stages");

@@ -62,6 +62,7 @@ namespace Xakeri {
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private:
 		int inputStart;
 
@@ -78,11 +79,13 @@ namespace Xakeri {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -119,7 +122,7 @@ namespace Xakeri {
 			this->label2->ImageAlign = System::Drawing::ContentAlignment::MiddleRight;
 			this->label2->Location = System::Drawing::Point(43, 496);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(532, 63);
+			this->label2->Size = System::Drawing::Size(423, 51);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Защита от фишинга";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -138,7 +141,7 @@ namespace Xakeri {
 			this->label3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"label3.Image")));
 			this->label3->Location = System::Drawing::Point(136, 885);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(600, 63);
+			this->label3->Size = System::Drawing::Size(482, 51);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Привязка к устройству";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -157,7 +160,7 @@ namespace Xakeri {
 			this->label4->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->label4->Location = System::Drawing::Point(3, 709);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(584, 63);
+			this->label4->Size = System::Drawing::Size(468, 51);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Минимизация ущерба";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -176,7 +179,7 @@ namespace Xakeri {
 			this->label5->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->label5->Location = System::Drawing::Point(226, 120);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(439, 126);
+			this->label5->Size = System::Drawing::Size(351, 102);
 			this->label5->TabIndex = 5;
 			this->label5->Text = L"Зависимость от \r\nустройства";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -196,7 +199,7 @@ namespace Xakeri {
 			this->label6->ImageAlign = System::Drawing::ContentAlignment::TopRight;
 			this->label6->Location = System::Drawing::Point(112, 319);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(444, 126);
+			this->label6->Size = System::Drawing::Size(356, 102);
 			this->label6->TabIndex = 6;
 			this->label6->Text = L"Неудобство при \r\nчастых входах";
 			this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -215,7 +218,7 @@ namespace Xakeri {
 			this->label7->ImageAlign = System::Drawing::ContentAlignment::TopLeft;
 			this->label7->Location = System::Drawing::Point(136, 40);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(456, 63);
+			this->label7->Size = System::Drawing::Size(367, 51);
 			this->label7->TabIndex = 7;
 			this->label7->Text = L"Риск блокировки";
 			this->label7->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Stage5::label7_MouseDown);
@@ -238,16 +241,6 @@ namespace Xakeri {
 			this->panel1->Size = System::Drawing::Size(962, 1038);
 			this->panel1->TabIndex = 8;
 			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
-				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->pictureBox1->Location = System::Drawing::Point(14, 589);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(939, 431);
-			this->pictureBox1->TabIndex = 8;
-			this->pictureBox1->TabStop = false;
-			// 
 			// pictureBox2
 			// 
 			this->pictureBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
@@ -258,25 +251,49 @@ namespace Xakeri {
 			this->pictureBox2->TabIndex = 9;
 			this->pictureBox2->TabStop = false;
 			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->pictureBox1->Location = System::Drawing::Point(14, 589);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(939, 431);
+			this->pictureBox1->TabIndex = 8;
+			this->pictureBox1->TabStop = false;
+			// 
+			// pictureBox3
+			// 
+			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
+			this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox3->Location = System::Drawing::Point(780, 1);
+			this->pictureBox3->Name = L"pictureBox3";
+			this->pictureBox3->Size = System::Drawing::Size(118, 38);
+			this->pictureBox3->TabIndex = 10;
+			this->pictureBox3->TabStop = false;
+			// 
 			// Stage5
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->ClientSize = System::Drawing::Size(1902, 1033);
+			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"Stage5";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Stage5";
+			this->Text = L"Двухфакторная защита";
 			this->Load += gcnew System::EventHandler(this, &Stage5::Stage5_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -438,12 +455,12 @@ namespace Xakeri {
 		pictureBox2->SendToBack(); // отправить на задний план
 
 		srand(time(0));
-		label2->Location = System::Drawing::Point(ranx(10,270), rany(0, 850));
-		label3->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label4->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label5->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label6->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
-		label7->Location = System::Drawing::Point(ranx(10, 270), rany(0, 805));
+		label2->Location = System::Drawing::Point(ranx(10,200), rany(0, 600));
+		label3->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label4->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label5->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label6->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
+		label7->Location = System::Drawing::Point(ranx(10, 200), rany(0, 600));
 
 	}
 
