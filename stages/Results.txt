@@ -1,0 +1,5 @@
+﻿Ip: 
+Login: cnwyavr
+Password:
+serverKey:
+name: Бобс
