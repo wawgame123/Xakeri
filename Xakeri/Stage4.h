@@ -140,9 +140,8 @@ namespace Xakeri {
 			   this->label1->ForeColor = System::Drawing::SystemColors::Control;
 			   this->label1->Location = System::Drawing::Point(1040, 112);
 			   this->label1->Name = L"label1";
-			   this->label1->Size = System::Drawing::Size(109, 39);
+			   this->label1->Size = System::Drawing::Size(0, 38);
 			   this->label1->TabIndex = 13;
-			   this->label1->Text = L"label1";
 			   // 
 			   // Stage4
 			   // 
