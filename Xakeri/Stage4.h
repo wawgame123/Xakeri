@@ -92,10 +92,11 @@ namespace Xakeri {
 			   this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 58.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
 			   this->textBox1->ForeColor = System::Drawing::SystemColors::MenuBar;
-			   this->textBox1->Location = System::Drawing::Point(-5, 1);
+			   this->textBox1->Location = System::Drawing::Point(-4, 1);
+			   this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			   this->textBox1->Multiline = true;
 			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(945, 1031);
+			   this->textBox1->Size = System::Drawing::Size(709, 838);
 			   this->textBox1->TabIndex = 0;
 			   this->textBox1->TextChanged += gcnew System::EventHandler(this, &Stage4::textBox1_TextChanged);
 			   // 
@@ -104,9 +105,10 @@ namespace Xakeri {
 			   this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			   this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			   this->pictureBox1->InitialImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.InitialImage")));
-			   this->pictureBox1->Location = System::Drawing::Point(981, 467);
+			   this->pictureBox1->Location = System::Drawing::Point(736, 379);
+			   this->pictureBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			   this->pictureBox1->Name = L"pictureBox1";
-			   this->pictureBox1->Size = System::Drawing::Size(851, 522);
+			   this->pictureBox1->Size = System::Drawing::Size(638, 424);
 			   this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			   this->pictureBox1->TabIndex = 3;
 			   this->pictureBox1->TabStop = false;
@@ -115,9 +117,10 @@ namespace Xakeri {
 			   // 
 			   this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
 			   this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			   this->pictureBox2->Location = System::Drawing::Point(780, 1);
+			   this->pictureBox2->Location = System::Drawing::Point(585, 1);
+			   this->pictureBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			   this->pictureBox2->Name = L"pictureBox2";
-			   this->pictureBox2->Size = System::Drawing::Size(118, 38);
+			   this->pictureBox2->Size = System::Drawing::Size(88, 31);
 			   this->pictureBox2->TabIndex = 9;
 			   this->pictureBox2->TabStop = false;
 			   // 
@@ -125,9 +128,10 @@ namespace Xakeri {
 			   // 
 			   this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
 			   this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			   this->pictureBox3->Location = System::Drawing::Point(939, 1);
+			   this->pictureBox3->Location = System::Drawing::Point(704, 1);
+			   this->pictureBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			   this->pictureBox3->Name = L"pictureBox3";
-			   this->pictureBox3->Size = System::Drawing::Size(970, 1031);
+			   this->pictureBox3->Size = System::Drawing::Size(728, 838);
 			   this->pictureBox3->TabIndex = 12;
 			   this->pictureBox3->TabStop = false;
 			   // 
@@ -138,20 +142,21 @@ namespace Xakeri {
 			   this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(204)));
 			   this->label1->ForeColor = System::Drawing::SystemColors::Control;
-			   this->label1->Location = System::Drawing::Point(1040, 112);
+			   this->label1->Location = System::Drawing::Point(780, 91);
+			   this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			   this->label1->Name = L"label1";
-			   this->label1->Size = System::Drawing::Size(109, 39);
+			   this->label1->Size = System::Drawing::Size(86, 31);
 			   this->label1->TabIndex = 13;
 			   this->label1->Text = L"label1";
 			   // 
 			   // Stage4
 			   // 
-			   this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			   this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			   this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			   this->ClientSize = System::Drawing::Size(1902, 1033);
+			   this->ClientSize = System::Drawing::Size(1426, 839);
 			   this->Controls->Add(this->label1);
 			   this->Controls->Add(this->pictureBox3);
 			   this->Controls->Add(this->pictureBox2);
@@ -159,6 +164,7 @@ namespace Xakeri {
 			   this->Controls->Add(this->textBox1);
 			   this->DoubleBuffered = true;
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			   this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			   this->MaximizeBox = false;
 			   this->MinimizeBox = false;
 			   this->Name = L"Stage4";
