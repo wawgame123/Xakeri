@@ -312,7 +312,7 @@ namespace Xakeri {
 		pictureBox3->SendToBack();
 		// Устанавливаем seed для rand
 		srand(static_cast<unsigned int>(time(NULL)));
-		pictureBox1->Image = System::Drawing::Image::FromFile("..\\images\\alph.png");
+
 
 		// Генерируем случайный ключ (от 1 до 32)
 		shiftKey = (rand() % (RUSSIAN_ALPHABET_SIZE - 1)) + 1;
